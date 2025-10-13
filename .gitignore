@@ -1,0 +1,32 @@
+# Ambiente virtual
+venv/
+.env
+
+# Arquivos de cache do Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Dados e banco de dados
+data/*.db
+data/*.sqlite
+data/*.sqlite3
+
+# Arquivos temporários
+*.log
+*.tmp
+
+# Configurações do VS Code
+.vscode/
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos de pacotes NLTK baixados localmente
+nltk_data/
+
+# Arquivos de saída
+*.out
+*.bak
