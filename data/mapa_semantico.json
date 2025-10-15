@@ -1,9 +1,31 @@
 [
   {
     "termo_principal": "placa de circuito impresso",
-    "sinonimos": ["placa mãe", "pcb", "pcba", "sub-placa", "placa principal", "placa"],
-    "traducoes_en": ["printed circuit board", "motherboard", "mainboard", "pcb assembly"],
-    "termos_tecnicos_relacionados": ["A6 V1.0C", "SP A6", "Soquete de Cartão IC", "PCBA da Base A1", "PCBA do POGO", "PCBA da Placa de Sub-teclado", "PCBA da Sub-Placa USB", "Antena Principal PCB", "PCBA da Sub-Placa LCM"],
+    "sinonimos": [
+      "placa mãe",
+      "pcb",
+      "pcba",
+      "sub-placa",
+      "placa principal",
+      "placa"
+    ],
+    "traducoes_en": [
+      "printed circuit board",
+      "motherboard",
+      "mainboard",
+      "pcb assembly"
+    ],
+    "termos_tecnicos_relacionados": [
+      "A6 V1.0C",
+      "SP A6",
+      "Soquete de Cartão IC",
+      "PCBA da Base A1",
+      "PCBA do POGO",
+      "PCBA da Placa de Sub-teclado",
+      "PCBA da Sub-Placa USB",
+      "Antena Principal PCB",
+      "PCBA da Sub-Placa LCM"
+    ],
     "sugestoes_ncm": [
       {
         "ncm": "8473.30.41",
@@ -21,9 +43,28 @@
   },
   {
     "termo_principal": "tela",
-    "sinonimos": ["display", "painel de toque", "touch panel", "lcm", "tela tp", "touch screen"],
-    "traducoes_en": ["screen", "display", "touch panel", "lcd module"],
-    "termos_tecnicos_relacionados": ["FPC da Tela (LCM)", "Borracha Zebra (Malha) da Tela", "Módulo de Tela (TLCM)"],
+    "sinonimos": [
+      "display",
+      "painel de toque",
+      "touch panel",
+      "lcm",
+      "tela tp",
+      "touch screen",
+      "touch",
+      "screen",
+      "touchscreen"
+    ],
+    "traducoes_en": [
+      "screen",
+      "display",
+      "touch panel",
+      "lcd module"
+    ],
+    "termos_tecnicos_relacionados": [
+      "FPC da Tela (LCM)",
+      "Borracha Zebra (Malha) da Tela",
+      "Módulo de Tela (TLCM)"
+    ],
     "sugestoes_ncm": [
       {
         "ncm": "8524.91.00",
@@ -35,9 +76,18 @@
   },
   {
     "termo_principal": "câmera",
-    "sinonimos": ["módulo de câmera", "módulo câmera"],
-    "traducoes_en": ["camera", "camera module"],
-    "termos_tecnicos_relacionados": ["Câmera Traseira 2MP", "Lente da Câmera Traseira"],
+    "sinonimos": [
+      "módulo de câmera",
+      "módulo câmera"
+    ],
+    "traducoes_en": [
+      "camera",
+      "camera module"
+    ],
+    "termos_tecnicos_relacionados": [
+      "Câmera Traseira 2MP",
+      "Lente da Câmera Traseira"
+    ],
     "sugestoes_ncm": [
       {
         "ncm": "8529.90.20",
@@ -49,9 +99,20 @@
   },
   {
     "termo_principal": "leitor de código de barras",
-    "sinonimos": ["scanner", "leitor de código", "leitor código"],
-    "traducoes_en": ["barcode scanner", "barcode reader"],
-    "termos_tecnicos_relacionados": ["E3-OV9281", "FPC do Leitor de Código de Barras E3", "Lente do Scanner"],
+    "sinonimos": [
+      "scanner",
+      "leitor de código",
+      "leitor código"
+    ],
+    "traducoes_en": [
+      "barcode scanner",
+      "barcode reader"
+    ],
+    "termos_tecnicos_relacionados": [
+      "E3-OV9281",
+      "FPC do Leitor de Código de Barras E3",
+      "Lente do Scanner"
+    ],
     "sugestoes_ncm": [
       {
         "ncm": "8471.60.52",
@@ -63,9 +124,18 @@
   },
   {
     "termo_principal": "bateria",
-    "sinonimos": ["acumulador elétrico"],
-    "traducoes_en": ["battery", "rechargeable battery"],
-    "termos_tecnicos_relacionados": ["Bateria Botão (Tipo Moeda)", "Fita de Fácil Remoção da Bateria", "Espuma de Proteção da Bateria"],
+    "sinonimos": [
+      "acumulador elétrico"
+    ],
+    "traducoes_en": [
+      "battery",
+      "rechargeable battery"
+    ],
+    "termos_tecnicos_relacionados": [
+      "Bateria Botão (Tipo Moeda)",
+      "Fita de Fácil Remoção da Bateria",
+      "Espuma de Proteção da Bateria"
+    ],
     "sugestoes_ncm": [
       {
         "ncm": "8507.60.00",
@@ -83,9 +153,19 @@
   },
   {
     "termo_principal": "antena",
-    "sinonimos": ["módulo de antena", "receptor de antena"],
-    "traducoes_en": ["antenna"],
-    "termos_tecnicos_relacionados": ["Antena NFC Principal", "Antena Principal V07", "Antena 'Três em Um' V1", "Antena de Diversidade"],
+    "sinonimos": [
+      "módulo de antena",
+      "receptor de antena"
+    ],
+    "traducoes_en": [
+      "antenna"
+    ],
+    "termos_tecnicos_relacionados": [
+      "Antena NFC Principal",
+      "Antena Principal V07",
+      "Antena 'Três em Um' V1",
+      "Antena de Diversidade"
+    ],
     "sugestoes_ncm": [
       {
         "ncm": "8517.71.90",
@@ -97,9 +177,25 @@
   },
   {
     "termo_principal": "cabo flexível chato",
-    "sinonimos": ["fpc", "ffc", "flat cable", "cabo chato", "cabo flexível"],
-    "traducoes_en": ["flexible printed circuit", "flat flexible cable"],
-    "termos_tecnicos_relacionados": ["FPC do Indicador LED", "FPC da Chave Lateral", "FPC do POGO PIN", "FPC Principal", "FPC da Tela", "FFC do POGO"],
+    "sinonimos": [
+      "fpc",
+      "ffc",
+      "flat cable",
+      "cabo chato",
+      "cabo flexível"
+    ],
+    "traducoes_en": [
+      "flexible printed circuit",
+      "flat flexible cable"
+    ],
+    "termos_tecnicos_relacionados": [
+      "FPC do Indicador LED",
+      "FPC da Chave Lateral",
+      "FPC do POGO PIN",
+      "FPC Principal",
+      "FPC da Tela",
+      "FFC do POGO"
+    ],
     "sugestoes_ncm": [
       {
         "ncm": "8544.42.00",
@@ -111,9 +207,28 @@
   },
   {
     "termo_principal": "carcaça",
-    "sinonimos": ["gabinete", "chassi", "suporte", "estrutura", "tampa"],
-    "traducoes_en": ["housing", "enclosure", "chassis", "frame", "cover"],
-    "termos_tecnicos_relacionados": ["Conjunto da Carcaça Frontal", "Conjunto da Carcaça Traseira", "Estrutura de Suporte Pogo", "Suporte de Fixação", "Tampa da Base", "Dobradiça (Hinge)"],
+    "sinonimos": [
+      "gabinete",
+      "chassi",
+      "suporte",
+      "estrutura",
+      "tampa"
+    ],
+    "traducoes_en": [
+      "housing",
+      "enclosure",
+      "chassis",
+      "frame",
+      "cover"
+    ],
+    "termos_tecnicos_relacionados": [
+      "Conjunto da Carcaça Frontal",
+      "Conjunto da Carcaça Traseira",
+      "Estrutura de Suporte Pogo",
+      "Suporte de Fixação",
+      "Tampa da Base",
+      "Dobradiça (Hinge)"
+    ],
     "sugestoes_ncm": [
       {
         "ncm": "8473.30.19",
@@ -131,9 +246,19 @@
   },
   {
     "termo_principal": "parafuso",
-    "sinonimos": ["fixador", "pino", "perno"],
-    "traducoes_en": ["screw"],
-    "termos_tecnicos_relacionados": ["Parafuso de Máquina Phillips M1.4*L3.5", "Parafuso Auto-roscante Phillips M1.4*L2.0", "Parafuso com Arruela M2*H4.0"],
+    "sinonimos": [
+      "fixador",
+      "pino",
+      "perno"
+    ],
+    "traducoes_en": [
+      "screw"
+    ],
+    "termos_tecnicos_relacionados": [
+      "Parafuso de Máquina Phillips M1.4*L3.5",
+      "Parafuso Auto-roscante Phillips M1.4*L2.0",
+      "Parafuso com Arruela M2*H4.0"
+    ],
     "sugestoes_ncm": [
       {
         "ncm": "7318.15.00",
@@ -145,9 +270,23 @@
   },
   {
     "termo_principal": "adesivo",
-    "sinonimos": ["fita adesiva", "adesivo de espuma", "película", "fita dupla face"],
-    "traducoes_en": ["adhesive", "sticker", "foam tape"],
-    "termos_tecnicos_relacionados": ["Adesivo Traseiro da Lente", "Adesivo de Espuma", "Fita de Fácil Remoção", "Película PC da Cabeça Magnética"],
+    "sinonimos": [
+      "fita adesiva",
+      "adesivo de espuma",
+      "película",
+      "fita dupla face"
+    ],
+    "traducoes_en": [
+      "adhesive",
+      "sticker",
+      "foam tape"
+    ],
+    "termos_tecnicos_relacionados": [
+      "Adesivo Traseiro da Lente",
+      "Adesivo de Espuma",
+      "Fita de Fácil Remoção",
+      "Película PC da Cabeça Magnética"
+    ],
     "sugestoes_ncm": [
       {
         "ncm": "3919.90.90",
@@ -159,9 +298,24 @@
   },
   {
     "termo_principal": "espuma",
-    "sinonimos": ["esponja", "calço", "vedação"],
-    "traducoes_en": ["foam", "sponge", "gasket", "seal"],
-    "termos_tecnicos_relacionados": ["Espuma de Vedação", "Espuma de Pressão", "Esponja Condutora", "Espuma de Proteção da Bateria", "Pé de Borracha"],
+    "sinonimos": [
+      "esponja",
+      "calço",
+      "vedação"
+    ],
+    "traducoes_en": [
+      "foam",
+      "sponge",
+      "gasket",
+      "seal"
+    ],
+    "termos_tecnicos_relacionados": [
+      "Espuma de Vedação",
+      "Espuma de Pressão",
+      "Esponja Condutora",
+      "Espuma de Proteção da Bateria",
+      "Pé de Borracha"
+    ],
     "sugestoes_ncm": [
       {
         "ncm": "3926.90.90",
@@ -179,9 +333,19 @@
   },
   {
     "termo_principal": "alto-falante",
-    "sinonimos": ["speaker", "auto-falante", "buzzer"],
-    "traducoes_en": ["speaker", "loudspeaker"],
-    "termos_tecnicos_relacionados": ["FPC Principal (Alto-falante)", "Alto-falante 1712"],
+    "sinonimos": [
+      "speaker",
+      "auto-falante",
+      "buzzer"
+    ],
+    "traducoes_en": [
+      "speaker",
+      "loudspeaker"
+    ],
+    "termos_tecnicos_relacionados": [
+      "FPC Principal (Alto-falante)",
+      "Alto-falante 1712"
+    ],
     "sugestoes_ncm": [
       {
         "ncm": "8518.29.90",
@@ -193,9 +357,18 @@
   },
   {
     "termo_principal": "motor",
-    "sinonimos": ["motor de vibração", "vibracall", "motor de vibra"],
-    "traducoes_en": ["motor", "vibration motor"],
-    "termos_tecnicos_relacionados": ["Motor de Vibração"],
+    "sinonimos": [
+      "motor de vibração",
+      "vibracall",
+      "motor de vibra"
+    ],
+    "traducoes_en": [
+      "motor",
+      "vibration motor"
+    ],
+    "termos_tecnicos_relacionados": [
+      "Motor de Vibração"
+    ],
     "sugestoes_ncm": [
       {
         "ncm": "8501.10.19",
@@ -207,8 +380,13 @@
   },
   {
     "termo_principal": "ímã",
-    "sinonimos": ["magnete", "imã"],
-    "traducoes_en": ["magnet"],
+    "sinonimos": [
+      "magnete",
+      "imã"
+    ],
+    "traducoes_en": [
+      "magnet"
+    ],
     "termos_tecnicos_relacionados": [],
     "sugestoes_ncm": [
       {
@@ -221,9 +399,18 @@
   },
   {
     "termo_principal": "impressora",
-    "sinonimos": ["módulo de impressão", "mecanismo de impressora", "impressora térmica"],
-    "traducoes_en": ["printer", "printer module"],
-    "termos_tecnicos_relacionados": ["Subconjunto da Impressora_Preto"],
+    "sinonimos": [
+      "módulo de impressão",
+      "mecanismo de impressora",
+      "impressora térmica"
+    ],
+    "traducoes_en": [
+      "printer",
+      "printer module"
+    ],
+    "termos_tecnicos_relacionados": [
+      "Subconjunto da Impressora_Preto"
+    ],
     "sugestoes_ncm": [
       {
         "ncm": "8443.99.90",
@@ -235,9 +422,25 @@
   },
   {
     "termo_principal": "fio elétrico",
-    "sinonimos": ["cabo", "fio", "chicote", "cabo elétrico", "condutor elétrico"],
-    "traducoes_en": ["wire", "cable", "harness", "electrical conductor"],
-    "termos_tecnicos_relacionados": ["fio de led", "cabo de força", "cabo usb", "chicote elétrico"],
+    "sinonimos": [
+      "cabo",
+      "fio",
+      "chicote",
+      "cabo elétrico",
+      "condutor elétrico"
+    ],
+    "traducoes_en": [
+      "wire",
+      "cable",
+      "harness",
+      "electrical conductor"
+    ],
+    "termos_tecnicos_relacionados": [
+      "fio de led",
+      "cabo de força",
+      "cabo usb",
+      "chicote elétrico"
+    ],
     "sugestoes_ncm": [
       {
         "ncm": "8544.42.00",
@@ -250,6 +453,308 @@
         "descricao": "Outros condutores elétricos, para uma tensão não superior a 1.000 V",
         "justificativa": "NCM mais genérico para fios e cabos elétricos que não necessariamente possuem conectores.",
         "confianca": "media"
+      }
+    ]
+  },
+  {
+    "termo_principal": "computador",
+    "sinonimos": [
+      "notebook",
+      "laptop",
+      "tablet",
+      "pc",
+      "desktop",
+      "servidor",
+      "workstation",
+      "estação de trabalho"
+    ],
+    "traducoes_en": [
+      "computer",
+      "notebook",
+      "laptop",
+      "tablet",
+      "pc",
+      "desktop",
+      "server",
+      "workstation"
+    ],
+    "termos_tecnicos_relacionados": [
+      "processador",
+      "cpu",
+      "memória ram",
+      "ram",
+      "disco rígido",
+      "hd",
+      "ssd",
+      "placa de vídeo",
+      "gpu",
+      "fonte de alimentação",
+      "psu",
+      "gabinete",
+      "cooler",
+      "sistema operacional",
+      "os",
+      "software",
+      "firmware",
+      "BIOS",
+      "UEFI",
+      "porta usb",
+      "hdmi",
+      "displayport",
+      "wi-fi",
+      "bluetooth",
+      "ethernet"
+    ],
+    "sugestoes_ncm": [
+      {
+        "ncm": "8471.30",
+        "descricao": "Máquinas automáticas para processamento de dados, portáteis, de peso não superior a 10 kg, contendo pelo menos uma unidade central de processamento, um teclado e uma tela (ecrã).",
+        "justificativa": "NCM para notebooks, laptops e tablets.",
+        "confianca": "alta"
+      },
+      {
+        "ncm": "8471.41",
+        "descricao": "Outras máquinas automáticas para processamento de dados: -- Contendo, no mesmo corpo, pelo menos uma unidade central de processamento e uma unidade de entrada e de saída, mesmo combinadas.",
+        "justificativa": "NCM para computadores de mesa tipo 'all-in-one'.",
+        "confianca": "alta"
+      },
+      {
+        "ncm": "8471.50.10",
+        "descricao": "De pequena capacidade, baseadas em microprocessadores, com capacidade de instalação, dentro do mesmo gabinete, de unidades de memória da subposição 8471.70, podendo conter múltiplos conectores de expansão (slots), e valor FOB não superior a US$ 12.500,00, por unidade",
+        "justificativa": "NCM comum para computadores de mesa (desktops).",
+        "confianca": "alta"
+      }
+    ]
+  },
+  {
+    "termo_principal": "processador",
+    "sinonimos": [
+      "cpu",
+      "unidade central de processamento",
+      "microprocessador"
+    ],
+    "traducoes_en": [
+      "processor",
+      "cpu",
+      "central processing unit",
+      "microprocessor"
+    ],
+    "termos_tecnicos_relacionados": [
+      "intel",
+      "amd",
+      "arm",
+      "qualcomm",
+      "snapdragon",
+      "core",
+      "ryzen",
+      "clock",
+      "cache",
+      "socket",
+      "soquete",
+      "núcleo",
+      "thread",
+      "i3",
+      "i5",
+      "i7",
+      "i9"
+    ],
+    "sugestoes_ncm": [
+      {
+        "ncm": "8542.31.90",
+        "descricao": "Outros - Processadores e controladores, mesmo combinados com memórias, conversores, circuitos lógicos, amplificadores, relógios e circuitos de temporização, ou outros circuitos",
+        "justificativa": "NCM genérico e amplamente utilizado para CPUs e SoCs (System on a Chip).",
+        "confianca": "alta"
+      }
+    ]
+  },
+  {
+    "termo_principal": "memória ram",
+    "sinonimos": [
+      "ram",
+      "memória",
+      "memória de acesso aleatório",
+      "pente de memória",
+      "módulo de memória"
+    ],
+    "traducoes_en": [
+      "ram",
+      "random access memory",
+      "memory module",
+      "dimm",
+      "so-dimm"
+    ],
+    "termos_tecnicos_relacionados": [
+      "ddr3",
+      "ddr4",
+      "ddr5",
+      "lpddr",
+      "sodimm",
+      "dimm",
+      "frequência",
+      "latência",
+      "gb",
+      "gigabyte",
+      "dual-channel"
+    ],
+    "sugestoes_ncm": [
+      {
+        "ncm": "8473.30.42",
+        "descricao": "Memórias de acesso aleatório (RAM)",
+        "justificativa": "NCM específico para módulos de memória RAM quando classificados como partes de computadores.",
+        "confianca": "alta"
+      }
+    ]
+  },
+  {
+    "termo_principal": "unidade de armazenamento",
+    "sinonimos": [
+      "disco rígido",
+      "hd",
+      "hdd",
+      "ssd",
+      "unidade de estado sólido",
+      "armazenamento",
+      "hard drive"
+    ],
+    "traducoes_en": [
+      "storage drive",
+      "hard disk drive",
+      "hdd",
+      "solid state drive",
+      "ssd",
+      "storage"
+    ],
+    "termos_tecnicos_relacionados": [
+      "sata",
+      "nvme",
+      "m.2",
+      "pcie",
+      "rpm",
+      "leitura",
+      "gravação",
+      "tb",
+      "terabyte",
+      "gb",
+      "gigabyte",
+      "nand",
+      "qlc",
+      "tlc"
+    ],
+    "sugestoes_ncm": [
+      {
+        "ncm": "8471.70.10",
+        "descricao": "Unidades de discos rígidos (HDD)",
+        "justificativa": "NCM específico para discos rígidos magnéticos tradicionais.",
+        "confianca": "alta"
+      },
+      {
+        "ncm": "8471.70.40",
+        "descricao": "Unidades de memória de estado sólido (SSD - solid-state drives)",
+        "justificativa": "NCM específico para unidades de estado sólido (SSDs).",
+        "confianca": "alta"
+      }
+    ]
+  },
+  {
+    "termo_principal": "robô aspirador",
+    "sinonimos": [
+      "aspirador de pó robô",
+      "robô de limpeza",
+      "smart vacuum"
+    ],
+    "traducoes_en": [
+      "robot vacuum",
+      "robotic vacuum cleaner",
+      "smart vacuum"
+    ],
+    "termos_tecnicos_relacionados": [
+      "mapeamento",
+      "laser",
+      "lidar",
+      "navegação",
+      "vslam",
+      "sensor de queda",
+      "anti-queda",
+      "escova lateral",
+      "escova principal",
+      "filtro hepa",
+      "base de carregamento",
+      "auto-esvaziamento",
+      "self-empty",
+      "mop",
+      "passa pano",
+      "potência de sucção",
+      "pa"
+    ],
+    "sugestoes_ncm": [
+      {
+        "ncm": "8508.11.00",
+        "descricao": "Aspiradores -- De potência não superior a 1.500 W e cujo volume do reservatório não exceda 20 l",
+        "justificativa": "NCM para aspiradores de pó domésticos, categoria na qual os robôs aspiradores se enquadram.",
+        "confianca": "alta"
+      }
+    ]
+  },
+  {
+    "termo_principal": "automação residencial",
+    "sinonimos": [
+      "casa inteligente",
+      "domótica",
+      "smart home"
+    ],
+    "traducoes_en": [
+      "home automation",
+      "smart home",
+      "domotics"
+    ],
+    "termos_tecnicos_relacionados": [
+      "hub",
+      "gateway",
+      "controlador",
+      "sensor de porta",
+      "sensor de movimento",
+      "lâmpada inteligente",
+      "smart lamp",
+      "tomada inteligente",
+      "smart plug",
+      "interruptor inteligente",
+      "smart switch",
+      "assistente virtual",
+      "alexa",
+      "google assistant",
+      "siri",
+      "zigbee",
+      "z-wave",
+      "wi-fi",
+      "bluetooth",
+      "ble",
+      "matter",
+      "thread"
+    ],
+    "sugestoes_ncm": [
+      {
+        "ncm": "8517.62.77",
+        "descricao": "Outros aparelhos para transmissão ou recepção de voz, imagem ou outros dados, incluindo os aparelhos para comunicação em redes por fio ou sem fio, de frequência inferior a 15 GHz",
+        "justificativa": "NCM aplicável a hubs e gateways de automação residencial que comunicam via Wi-Fi, Zigbee, etc.",
+        "confianca": "media"
+      },
+      {
+        "ncm": "8536.50.90",
+        "descricao": "Outros interruptores",
+        "justificativa": "NCM para interruptores e tomadas inteligentes.",
+        "confianca": "alta"
+      },
+      {
+        "ncm": "9405.42.00",
+        "descricao": "Outras luminárias e aparelhos de iluminação, elétricos -- Concebidos para serem utilizados unicamente com fontes de luz de diodos emissores de luz (LED)",
+        "justificativa": "NCM para lâmpadas e luminárias de LED inteligentes.",
+        "confianca": "alta"
+      },
+      {
+        "ncm": "8543.70.99",
+        "descricao": "Outras máquinas e aparelhos elétricos com função própria, não especificados nem compreendidos em outras posições deste Capítulo",
+        "justificativa": "NCM 'catch-all' que pode ser usado para dispositivos de automação mais específicos sem classificação própria.",
+        "confianca": "baixa"
       }
     ]
   }

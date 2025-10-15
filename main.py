@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-# main.py (VERSÃO HÍBRIDA FINAL - Refatorado com Mapa Semântico)
-
 import os
 import json
 import re
@@ -32,7 +29,10 @@ except LookupError:
 # --- CONFIGURAÇÃO ---
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_PATH = os.path.join(BASE_DIR, 'data', 'openfiscal.db')
-MAPA_SEMANTICO_PATH = os.path.join(BASE_DIR, 'data', 'mapa_semantico.json') # ALTERADO
+MAPA_SEMANTICO_PATH = os.path.join(BASE_DIR, 'data', 'mapa_semantico.json')
+
+print(f"DB_PATH: {DB_PATH}")  # Adicione este log
+print(f"MAPA_SEMANTICO_PATH: {MAPA_SEMANTICO_PATH}")  # Adicione este log
 
 app = FastAPI(
     title="Serviço de Busca NCM (Modelo Híbrido com Mapa Semântico)",
@@ -66,7 +66,7 @@ class ApiResponse(BaseModel):
 df_ncm: pd.DataFrame = None
 vectorizer: TfidfVectorizer = None
 ncm_matrix: np.ndarray = None
-MAPA_SEMANTICO: Dict[str, Any] = {} # ALTERADO
+MAPA_SEMANTICO: Dict[str, Any] = {}
 
 # --- NÚCLEO DE NLP ---
 stemmer = SnowballStemmer('portuguese')
@@ -85,24 +85,40 @@ def preprocess_text(text: str) -> str:
 
 def find_best_category(query: str) -> Tuple[str, Any]:
     """
-    Encontra a melhor categoria no mapa semântico para a consulta.
+    Encontra a melhor categoria no mapa semântico para a consulta, usando uma
+    abordagem ponderada baseada em palavras-chave.
     Retorna os dados da categoria.
     """
     query_lower = query.lower()
+    processed_query = re.sub(r'[,.\-]', ' ', query_lower)
+    query_words = set(processed_query.split())
+
     best_category_data = None
     max_score = 0
 
-    for term, data in MAPA_SEMANTICO.items(): # ALTERADO
-        all_variants = [term] + data.get('sinonimos', [])
+    for term, data in MAPA_SEMANTICO.items():
         score = 0
-        for variant in all_variants:
-            if variant in query_lower:
-                score += len(variant)
         
+        # Função interna para calcular a pontuação
+        def get_match_score(variants, weight):
+            match_score = 0
+            for variant in variants:
+                variant_words = set(variant.lower().split())
+                intersection = query_words.intersection(variant_words)
+                if intersection:
+                    match_score += sum(len(word) for word in intersection)
+            return match_score * weight
+
+        # Ponderação: termo_principal > sinonimos > outros
+        score += get_match_score([term], 3)
+        score += get_match_score(data.get('sinonimos', []), 2)
+        score += get_match_score(data.get('traducoes_en', []), 1)
+        score += get_match_score(data.get('termos_tecnicos_relacionados', []), 1)
+
         if score > max_score:
             max_score = score
             best_category_data = data
-            
+
     return best_category_data
 
 def search_by_similarity(query: str) -> List[NcmResult]:
@@ -116,7 +132,7 @@ def search_by_similarity(query: str) -> List[NcmResult]:
     query_vector = vectorizer.transform([processed_q])
     cosine_similarities = cosine_similarity(query_vector, ncm_matrix).flatten()
     related_docs_indices = cosine_similarities.argsort()[:-26:-1]
-    
+
     results = []
     for i in related_docs_indices:
         score = cosine_similarities[i]
@@ -132,22 +148,49 @@ def search_by_similarity(query: str) -> List[NcmResult]:
 # --- LÓGICA DE INICIALIZAÇÃO ---
 @app.on_event("startup")
 def load_data_and_model():
-    global df_ncm, vectorizer, ncm_matrix, MAPA_SEMANTICO # ALTERADO
+    global df_ncm, vectorizer, ncm_matrix, MAPA_SEMANTICO
     print("--- INICIANDO SERVIÇO DE BUSCA NCM (Híbrido) ---")
-    
+
     # Carregar Mapa Semântico
-    if os.path.exists(MAPA_SEMANTICO_PATH): # ALTERADO
-        with open(MAPA_SEMANTICO_PATH, 'r', encoding='utf-8') as f: # ALTERADO
+    if os.path.exists(MAPA_SEMANTICO_PATH):
+        print("Mapa semântico encontrado.")
+        with open(MAPA_SEMANTICO_PATH, 'r', encoding='utf-8') as f:
             mapa_data = json.load(f)
-            MAPA_SEMANTICO = {item['termo_principal'].lower(): item for item in mapa_data} # ALTERADO
-        print(f"Mapa semântico carregado com {len(MAPA_SEMANTICO)} termos.") # ALTERADO
-    
+        MAPA_SEMANTICO = {item['termo_principal'].lower(): item for item in mapa_data}
+        print(f"Mapa semântico carregado com {len(MAPA_SEMANTICO)} termos.")
+    else:
+        print("Mapa semântico NÃO encontrado!")
+
     # Carregar Banco de Dados
-    conn = sqlite3.connect(DB_PATH)
-    query = "SELECT DISTINCT ncm, descricao FROM ibpt_taxes"
-    df_ncm = pd.read_sql_query(query, conn)
-    conn.close()
-    print(f"{len(df_ncm)} NCMs carregados.")
+    conn = None  # Inicializa conn fora do bloco try
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        print("Conexão com o banco de dados estabelecida.")
+
+        # Verificação direta da existência da tabela
+        cursor = conn.cursor()
+        cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='ibpt_taxes';")
+        table_exists = cursor.fetchone()
+        if table_exists:
+            print("Tabela ibpt_taxes encontrada.")
+        else:
+            print("Tabela ibpt_taxes NÃO encontrada!")
+            raise sqlite3.OperationalError("Tabela ibpt_taxes não encontrada")
+
+        query = "SELECT DISTINCT ncm, descricao FROM ibpt_taxes"
+        df_ncm = pd.read_sql_query(query, conn)
+        print(f"{len(df_ncm)} NCMs carregados.")
+
+    except sqlite3.Error as e:
+        print(f"Erro ao acessar o banco de dados: {e}")
+        raise
+    except Exception as e:
+        print(f"Erro genérico ao carregar dados do banco de dados: {e}")
+        raise
+    finally:
+        if conn:
+            conn.close()
+            print("Conexão com o banco de dados fechada.")
 
     # Treinar Modelo (para o fallback)
     df_ncm['descricao_processada'] = df_ncm['descricao'].apply(preprocess_text)
@@ -158,32 +201,32 @@ def load_data_and_model():
 # --- ENDPOINT DA API ---
 @app.get("/api/ncm-search", response_model=ApiResponse)
 async def search_ncm(description: str = Query(..., min_length=3, max_length=100)):
-    
+
     # Etapa 1: Tentar a busca por conhecimento (Mapa Semântico)
     best_category = find_best_category(description)
-    
+
     if best_category:
         results = [
             NcmResult(
                 ncm=sug['ncm'],
                 descricao=sug['descricao'],
                 score=1.0 if sug['confianca'] == 'alta' else 0.9,
-                source='mapa_semantico' # ALTERADO
+                source='mapa_semantico'
             )
             for sug in best_category.get('sugestoes_ncm', []) if sug['confianca'] != 'baixa'
         ]
-        
+
         if results:
             return ApiResponse(
                 query=description,
-                method=f"Mapa Semântico ({best_category['termo_principal']})", # ALTERADO
+                method=f"Mapa Semântico ({best_category['termo_principal']})",
                 count=len(results),
                 results=results
             )
 
     # Etapa 2: Se o mapa semântico falhar, usar a busca por similaridade (IA) como fallback
     results = search_by_similarity(description)
-    
+
     return ApiResponse(
         query=description,
         method="Similaridade de Cosseno",
