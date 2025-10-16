@@ -12,6 +12,7 @@ __pycache__/
 data/*.db
 data/*.sqlite
 data/*.sqlite3
+#data/mapa_semantico.json
 
 # Arquivos temporários
 *.log
@@ -30,3 +31,6 @@ nltk_data/
 # Arquivos de saída
 *.out
 *.bak
+
+# Script de inicialização
+#start_tupincm.sh

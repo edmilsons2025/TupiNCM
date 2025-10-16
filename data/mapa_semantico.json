@@ -19,12 +19,18 @@
       "A6 V1.0C",
       "SP A6",
       "Soquete de Cartão IC",
+      "suporte para cartão IC",
       "PCBA da Base A1",
       "PCBA do POGO",
       "PCBA da Placa de Sub-teclado",
       "PCBA da Sub-Placa USB",
       "Antena Principal PCB",
-      "PCBA da Sub-Placa LCM"
+      "PCBA da Sub-Placa LCM",
+      "A1_Base_V1.0B",
+      "A6_Placa-mãe_V1.0C",
+      "POGO_V1.0A",
+      "SP Small Board",
+      "cabeça magnética"
     ],
     "sugestoes_ncm": [
       {
@@ -63,7 +69,9 @@
     "termos_tecnicos_relacionados": [
       "FPC da Tela (LCM)",
       "Borracha Zebra (Malha) da Tela",
-      "Módulo de Tela (TLCM)"
+      "Módulo de Tela (TLCM)",
+      "TP_Tela_Preta",
+      "Tiras zebra de tela"
     ],
     "sugestoes_ncm": [
       {
@@ -86,7 +94,8 @@
     ],
     "termos_tecnicos_relacionados": [
       "Câmera Traseira 2MP",
-      "Lente da Câmera Traseira"
+      "Lente da Câmera Traseira",
+      "lente da câmera traseira"
     ],
     "sugestoes_ncm": [
       {
@@ -111,7 +120,10 @@
     "termos_tecnicos_relacionados": [
       "E3-OV9281",
       "FPC do Leitor de Código de Barras E3",
-      "Lente do Scanner"
+      "Lente do Scanner",
+      "Lente de digitalização",
+      "Tecla de digitalização",
+      "Scan Dock-OV9281"
     ],
     "sugestoes_ncm": [
       {
@@ -125,7 +137,8 @@
   {
     "termo_principal": "bateria",
     "sinonimos": [
-      "acumulador elétrico"
+      "acumulador elétrico",
+      "bateria de botão"
     ],
     "traducoes_en": [
       "battery",
@@ -164,7 +177,8 @@
       "Antena NFC Principal",
       "Antena Principal V07",
       "Antena 'Três em Um' V1",
-      "Antena de Diversidade"
+      "Antena de Diversidade",
+      "antena_NFC"
     ],
     "sugestoes_ncm": [
       {
@@ -194,7 +208,13 @@
       "FPC do POGO PIN",
       "FPC Principal",
       "FPC da Tela",
-      "FFC do POGO"
+      "FFC do POGO",
+      "Chave de código de digitalização_FPC",
+      "Anti-adulteração_FPC",
+      "Luz Indicadora_FPC",
+      "Botão lateral de energia_FPC",
+      "PRINCIPAL_SP_FPC",
+      "E3 Doca de digitalização_FPC"
     ],
     "sugestoes_ncm": [
       {
@@ -212,7 +232,10 @@
       "chassi",
       "suporte",
       "estrutura",
-      "tampa"
+      "tampa",
+      "gaveta sim card",
+      "suporte de fixação",
+      "plugue do slot para cartão"
     ],
     "traducoes_en": [
       "housing",
@@ -227,7 +250,25 @@
       "Estrutura de Suporte Pogo",
       "Suporte de Fixação",
       "Tampa da Base",
-      "Dobradiça (Hinge)"
+      "Dobradiça (Hinge)",
+      "Tampa da luz indicadora",
+      "Conjunto de revestimento traseiro",
+      "Conjunto de placa de arrasto superior frontal",
+      "Base frontal shell",
+      "Tampa de base",
+      "Conjunto de suporte frontal do suporte",
+      "Suporte Traseiro",
+      "Conjunto de carcaça traseira da base",
+      "Placa de arrasto superior, carcaça traseira",
+      "Conjunto da carcaça frontal",
+      "Decoração de base",
+      "Componente decorativo",
+      "Adaptador",
+      "Peças de reposição da tampa traseira",
+      "Suporte de fixação FPC leve",
+      "Trava inferior",
+      "suporte pogo",
+      "Suporte de fixação de abajur"
     ],
     "sugestoes_ncm": [
       {
@@ -274,7 +315,11 @@
       "fita adesiva",
       "adesivo de espuma",
       "película",
-      "fita dupla face"
+      "fita dupla face",
+      "etiqueta",
+      "cola",
+      "mylar",
+      "placa mylar"
     ],
     "traducoes_en": [
       "adhesive",
@@ -285,7 +330,20 @@
       "Adesivo Traseiro da Lente",
       "Adesivo de Espuma",
       "Fita de Fácil Remoção",
-      "Película PC da Cabeça Magnética"
+      "Película PC da Cabeça Magnética",
+      "Etiqueta à prova d'água",
+      "Adesivo para peças decorativas",
+      "Adesivo plano decorativo",
+      "Adesivo para lentes de scanner",
+      "Adesivo de espuma magnética",
+      "Adesivo para lente da câmera traseira",
+      "Cola de espuma para cobertura acrílica",
+      "Cola de espuma para remendo de suporte",
+      "Adesivo de fácil remoção para bateria",
+      "TP Adesivo",
+      "Proteção de componentes Mylar",
+      "Conector de tela isolado Mylar",
+      "Cola KD2262"
     ],
     "sugestoes_ncm": [
       {
@@ -293,41 +351,6 @@
         "descricao": "Outras chapas, folhas, tiras, fitas, películas e outras formas planas, autoadesivas, de plásticos",
         "justificativa": "NCM para fitas e películas adesivas de plástico. Abrange a maioria dos adesivos de dupla-face e espumas adesivas usadas em eletrônicos.",
         "confianca": "alta"
-      }
-    ]
-  },
-  {
-    "termo_principal": "espuma",
-    "sinonimos": [
-      "esponja",
-      "calço",
-      "vedação"
-    ],
-    "traducoes_en": [
-      "foam",
-      "sponge",
-      "gasket",
-      "seal"
-    ],
-    "termos_tecnicos_relacionados": [
-      "Espuma de Vedação",
-      "Espuma de Pressão",
-      "Esponja Condutora",
-      "Espuma de Proteção da Bateria",
-      "Pé de Borracha"
-    ],
-    "sugestoes_ncm": [
-      {
-        "ncm": "3926.90.90",
-        "descricao": "Outras obras de plásticos",
-        "justificativa": "Espumas não adesivas de plástico (ex: E.V.A, Poliuretano) são classificadas aqui como 'outras obras de plástico'.",
-        "confianca": "media"
-      },
-      {
-        "ncm": "4016.93.00",
-        "descricao": "Juntas, gaxetas e semelhantes, de borracha vulcanizada não endurecida",
-        "justificativa": "Se a espuma ou pé for de borracha e tiver função de vedação, esta é a classificação correta.",
-        "confianca": "media"
       }
     ]
   },
@@ -344,7 +367,11 @@
     ],
     "termos_tecnicos_relacionados": [
       "FPC Principal (Alto-falante)",
-      "Alto-falante 1712"
+      "Alto-falante 1712",
+      "Rede composta para alto-falantes",
+      "Espuma de vedação da cavidade traseira do alto-falante",
+      "Pano condutor para alto-falante",
+      "1712 Alto-falante"
     ],
     "sugestoes_ncm": [
       {
@@ -367,7 +394,8 @@
       "vibration motor"
     ],
     "termos_tecnicos_relacionados": [
-      "Motor de Vibração"
+      "Motor de Vibração",
+      "Motor"
     ],
     "sugestoes_ncm": [
       {
@@ -387,7 +415,9 @@
     "traducoes_en": [
       "magnet"
     ],
-    "termos_tecnicos_relacionados": [],
+    "termos_tecnicos_relacionados": [
+      "Ímã"
+    ],
     "sugestoes_ncm": [
       {
         "ncm": "8505.11.00",
@@ -426,7 +456,8 @@
       "cabo",
       "fio",
       "chicote",
-      "cabo elétrico",
+      "cabo de alimentação",
+      "cabo ac",
       "condutor elétrico"
     ],
     "traducoes_en": [
@@ -439,7 +470,8 @@
       "fio de led",
       "cabo de força",
       "cabo usb",
-      "chicote elétrico"
+      "chicote elétrico",
+      "Cabo AC Padrão Brasil"
     ],
     "sugestoes_ncm": [
       {
@@ -755,6 +787,153 @@
         "descricao": "Outras máquinas e aparelhos elétricos com função própria, não especificados nem compreendidos em outras posições deste Capítulo",
         "justificativa": "NCM 'catch-all' que pode ser usado para dispositivos de automação mais específicos sem classificação própria.",
         "confianca": "baixa"
+      }
+    ]
+  },
+  {
+    "termo_principal": "Componentes Metálicos",
+    "sinonimos": [
+      "chapa de aço",
+      "eixo",
+      "mola",
+      "haste",
+      "fivela"
+    ],
+    "traducoes_en": [
+      "metal components",
+      "steel plate",
+      "shaft",
+      "spring"
+    ],
+    "termos_tecnicos_relacionados": [
+      "Chapa magnética BTB",
+      "Chapa de aço para fixação",
+      "Chapa de aço para barra de direção",
+      "Eixo",
+      "Primavera",
+      "Haste de suporte",
+      "Fivela de trava"
+    ],
+    "sugestoes_ncm": [
+      {
+        "ncm": "7326.90.90",
+        "descricao": "Outras obras de ferro ou aço",
+        "justificativa": "NCM genérico para peças de ferro/aço sem uma classificação mais específica, como suportes, chapas e eixos.",
+        "confianca": "media"
+      },
+      {
+        "ncm": "7320.20.90",
+        "descricao": "Outras molas helicoidais de ferro ou aço",
+        "justificativa": "NCM para molas.",
+        "confianca": "alta"
+      }
+    ]
+  },
+  {
+    "termo_principal": "Botões e Teclas",
+    "sinonimos": [
+      "botão",
+      "tecla",
+      "pad",
+      "anel decorativo"
+    ],
+    "traducoes_en": [
+      "buttons",
+      "keys",
+      "keypad"
+    ],
+    "termos_tecnicos_relacionados": [
+      "Botão liga/desliga",
+      "botão de volume",
+      "DEC1_Decoração",
+      "DEC2_Plano decorativo",
+      "DEC3_Anel Decorativo"
+    ],
+    "sugestoes_ncm": [
+      {
+        "ncm": "3926.90.90",
+        "descricao": "Outras obras de plásticos",
+        "justificativa": "Botões e peças decorativas de plástico, que não são parte de um teclado completo, geralmente se enquadram aqui.",
+        "confianca": "media"
+      }
+    ]
+  },
+  {
+    "termo_principal": "Componentes de Borracha/Silicone",
+    "sinonimos": [
+      "borracha",
+      "silicone",
+      "tapete",
+      "almofada",
+      "manga",
+      "capa de borracha",
+      "pé de borracha"
+    ],
+    "traducoes_en": [
+      "rubber components",
+      "silicone parts",
+      "gasket",
+      "pad"
+    ],
+    "termos_tecnicos_relacionados": [
+      "Tapete para os pés",
+      "Almofada para os pés",
+      "Manga de borracha sensível à luz",
+      "mic_capa de borracha macia",
+      "Silicone condutivo",
+      "Silicone para dissipação de calor"
+    ],
+    "sugestoes_ncm": [
+      {
+        "ncm": "4016.99.90",
+        "descricao": "Outras obras de borracha vulcanizada não endurecida",
+        "justificativa": "NCM genérico para peças de borracha, como pés, capas e peças de vedação sem formato de junta.",
+        "confianca": "media"
+      },
+      {
+        "ncm": "4016.93.00",
+        "descricao": "Juntas, gaxetas e semelhantes, de borracha vulcanizada não endurecida",
+        "justificativa": "Se a peça tiver uma clara função de vedação (gaxeta), esta é a classificação correta.",
+        "confianca": "media"
+      }
+    ]
+  },
+  {
+    "termo_principal": "espuma",
+    "sinonimos": [
+      "esponja",
+      "calço",
+      "vedação",
+      "espuma condutora",
+      "pano condutor",
+      "tecido condutor"
+    ],
+    "traducoes_en": [
+      "foam",
+      "sponge",
+      "gasket",
+      "seal",
+      "conductive foam"
+    ],
+    "termos_tecnicos_relacionados": [
+      "Espuma de Vedação",
+      "Espuma de Pressão",
+      "Espuma de Proteção da Bateria",
+      "Pé de Borracha",
+      "Conector de câmera presente espuma prensada",
+      "Espuma de compressão do conector da placa-mãe",
+      "TYPC Espuma de vedação",
+      "Espuma de fixação de bateria",
+      "Adesivo de espuma para remendo",
+      "Espuma condutora de tela",
+      "Tecido condutor retrovisor"
+    ],
+    "sugestoes_ncm": [
+      {
+        "ncm": "3926.90.90",
+        "descricao": "Outras obras de plásticos",
+        "justificativa": "Espumas não adesivas de plástico (ex: E.V.A, Poliuretano) são classificadas aqui como 'outras obras de plástico'.",
+        "confianca": "media"
       }
     ]
   }

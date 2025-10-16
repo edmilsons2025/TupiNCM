@@ -67,10 +67,13 @@ Encontra resultados relevantes mesmo para termos novos ou inesperados.
 ```
 ncm-service-backend/
 ├── data/
-│   ├── mapa_semantico.json   # Glossário especializado do sistema
-│   └── openfiscal.db         # Banco de dados dos NCMs
-├── main.py                   # Código principal da API FastAPI
-└── requirements.txt          # Dependências do Python
+│   ├── cest_metadata.json            # Auxiliar para verificação de versão do banco de dados
+│   ├── ibpt.db                       # Banco de dados dos NCMs
+│   └── mapa_semantico_example.json   # Glossário especializado do sistema
+├── data_updater.py                   # Cria, Verifica e Atualiza o Banco de Dados
+├── main.py                           # Código principal da API FastAPI
+├── requirements.txt                  # Dependências do Python
+└── start_tupincm_example.sh          # Script de exemplo para iniciar a API por systemd
 ```
 
 ---
@@ -79,7 +82,7 @@ ncm-service-backend/
 
 1. **Clone o repositório:**
    ```bash
-   git clone https://github.com/edmilsons2025/TupiNCM
+   git clone https://github.com/edmilsons2025/TupiNCM.git
    cd ncm-service-backend
    ```
 
