@@ -1,5 +1,3 @@
-# /caminho/do/projeto/main.py
-
 import os
 import json
 import re
@@ -41,7 +39,7 @@ except LookupError:
 
 # --- CONFIGURAÇÃO ---
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DB_PATH = os.path.join(BASE_DIR, 'data', 'ibpt.db') # NOVO CAMINHO
+DB_PATH = os.path.join(BASE_DIR, 'data', 'ibpt.db')
 MAPA_SEMANTICO_PATH = os.path.join(BASE_DIR, 'data', 'mapa_semantico.json')
 
 print(f"DB_PATH: {DB_PATH}")  
@@ -53,7 +51,7 @@ app = FastAPI(
 )
 
 # --- CORS ---
-origins = ["http://localhost:3000", "https://seu-projeto-frontend.vercel.app", "http://192.168.10.117:3000"]
+origins = ["http://localhost:3000", "https://sani-ia.vercel.app/", "http://192.168.10.117:3000"]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
