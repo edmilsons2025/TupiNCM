@@ -30,22 +30,26 @@
       "A6_Placa-mãe_V1.0C",
       "POGO_V1.0A",
       "SP Small Board",
-      "cabeça magnética"
+      "cabeça magnética",
+      "PCBA"
     ],
     "sugestoes_ncm": [
       {
         "ncm": "8473.30.41",
         "descricao": "Placas-mãe (motherboards)",
         "justificativa": "NCM específico para placas-mãe montadas, que são o cérebro do equipamento. Aplica-se à 'Placa Mae da Placa Principal'.",
-        "confianca": "alta"
+        "confianca": "alta",
+        "add_by": "admin"
       },
       {
         "ncm": "8517.71.10",
         "descricao": "Circuitos impressos com componentes elétricos ou eletrônicos, montados",
         "justificativa": "NCM para placas montadas que são parte de aparelhos de comunicação (como um POS com 4G/Wi-Fi). Abrange as diversas sub-placas.",
-        "confianca": "alta"
+        "confianca": "alta",
+        "add_by": "admin"
       }
-    ]
+    ],
+    "add_by": "admin"
   },
   {
     "termo_principal": "tela",
@@ -60,63 +64,52 @@
       "screen",
       "touchscreen"
     ],
-    "traducoes_en": [
-      "screen",
-      "display",
-      "touch panel",
-      "lcd module"
-    ],
+    "traducoes_en": ["screen", "display", "touch panel", "lcd module"],
     "termos_tecnicos_relacionados": [
       "FPC da Tela (LCM)",
       "Borracha Zebra (Malha) da Tela",
       "Módulo de Tela (TLCM)",
       "TP_Tela_Preta",
-      "Tiras zebra de tela"
+      "Tiras zebra de tela",
+      "TLCM"
     ],
     "sugestoes_ncm": [
       {
         "ncm": "8524.91.00",
         "descricao": "Módulos de visualização de tela plana, mesmo que incorporem telas sensíveis ao toque -- De cristais líquidos (LCD)",
         "justificativa": "NCM específico para módulos de tela LCD, que frequentemente incluem o painel de toque. É a classificação mais provável.",
-        "confianca": "alta"
+        "confianca": "alta",
+        "add_by": "admin"
       }
-    ]
+    ],
+    "add_by": "admin"
   },
   {
     "termo_principal": "câmera",
-    "sinonimos": [
-      "módulo de câmera",
-      "módulo câmera"
-    ],
-    "traducoes_en": [
-      "camera",
-      "camera module"
-    ],
+    "sinonimos": ["módulo de câmera", "módulo câmera"],
+    "traducoes_en": ["camera", "camera module"],
     "termos_tecnicos_relacionados": [
       "Câmera Traseira 2MP",
       "Lente da Câmera Traseira",
-      "lente da câmera traseira"
+      "lente da câmera traseira",
+      "CAMERA",
+      "LED_LENS"
     ],
     "sugestoes_ncm": [
       {
         "ncm": "8529.90.20",
         "descricao": "Partes reconhecíveis como exclusiva ou principalmente destinadas aos aparelhos das posições 85.25 a 85.28 - De câmeras",
         "justificativa": "NCM específico para 'partes' de câmeras, o que se encaixa perfeitamente em um módulo de câmera para um equipamento maior.",
-        "confianca": "alta"
+        "confianca": "alta",
+        "add_by": "admin"
       }
-    ]
+    ],
+    "add_by": "admin"
   },
   {
     "termo_principal": "leitor de código de barras",
-    "sinonimos": [
-      "scanner",
-      "leitor de código",
-      "leitor código"
-    ],
-    "traducoes_en": [
-      "barcode scanner",
-      "barcode reader"
-    ],
+    "sinonimos": ["scanner", "leitor de código", "leitor código"],
+    "traducoes_en": ["barcode scanner", "barcode reader"],
     "termos_tecnicos_relacionados": [
       "E3-OV9281",
       "FPC do Leitor de Código de Barras E3",
@@ -130,20 +123,16 @@
         "ncm": "8471.60.52",
         "descricao": "Leitores de códigos de barras",
         "justificativa": "NCM específico para leitores de código de barras, classificados como uma unidade de entrada de dados.",
-        "confianca": "alta"
+        "confianca": "alta",
+        "add_by": "admin"
       }
-    ]
+    ],
+    "add_by": "admin"
   },
   {
     "termo_principal": "bateria",
-    "sinonimos": [
-      "acumulador elétrico",
-      "bateria de botão"
-    ],
-    "traducoes_en": [
-      "battery",
-      "rechargeable battery"
-    ],
+    "sinonimos": ["acumulador elétrico", "bateria de botão"],
+    "traducoes_en": ["battery", "rechargeable battery"],
     "termos_tecnicos_relacionados": [
       "Bateria Botão (Tipo Moeda)",
       "Fita de Fácil Remoção da Bateria",
@@ -154,54 +143,46 @@
         "ncm": "8507.60.00",
         "descricao": "Acumuladores elétricos de íon de lítio",
         "justificativa": "NCM padrão para baterias recarregáveis de íon de lítio, comuns em dispositivos portáteis.",
-        "confianca": "alta"
+        "confianca": "alta",
+        "add_by": "admin"
       },
       {
         "ncm": "8506.50.10",
         "descricao": "Pilhas e baterias de pilhas, elétricas, de lítio",
         "justificativa": "NCM para baterias tipo botão (não recarregáveis) de lítio, usadas para relógio interno (RTC).",
-        "confianca": "alta"
+        "confianca": "alta",
+        "add_by": "admin"
       }
-    ]
+    ],
+    "add_by": "admin"
   },
   {
     "termo_principal": "antena",
-    "sinonimos": [
-      "módulo de antena",
-      "receptor de antena"
-    ],
-    "traducoes_en": [
-      "antenna"
-    ],
+    "sinonimos": ["módulo de antena", "receptor de antena"],
+    "traducoes_en": ["antenna"],
     "termos_tecnicos_relacionados": [
       "Antena NFC Principal",
       "Antena Principal V07",
       "Antena 'Três em Um' V1",
       "Antena de Diversidade",
-      "antena_NFC"
+      "antena_NFC",
+      "ANT"
     ],
     "sugestoes_ncm": [
       {
         "ncm": "8517.71.90",
         "descricao": "Outras partes de aparelhos telefônicos - Antenas",
         "justificativa": "NCM para antenas usadas em aparelhos de comunicação, o que inclui Wi-Fi, Bluetooth, NFC e celular (4G/5G).",
-        "confianca": "alta"
+        "confianca": "alta",
+        "add_by": "admin"
       }
-    ]
+    ],
+    "add_by": "admin"
   },
   {
     "termo_principal": "cabo flexível chato",
-    "sinonimos": [
-      "fpc",
-      "ffc",
-      "flat cable",
-      "cabo chato",
-      "cabo flexível"
-    ],
-    "traducoes_en": [
-      "flexible printed circuit",
-      "flat flexible cable"
-    ],
+    "sinonimos": ["fpc", "ffc", "flat cable", "cabo chato", "cabo flexível"],
+    "traducoes_en": ["flexible printed circuit", "flat flexible cable"],
     "termos_tecnicos_relacionados": [
       "FPC do Indicador LED",
       "FPC da Chave Lateral",
@@ -214,16 +195,22 @@
       "Luz Indicadora_FPC",
       "Botão lateral de energia_FPC",
       "PRINCIPAL_SP_FPC",
-      "E3 Doca de digitalização_FPC"
+      "E3 Doca de digitalização_FPC",
+      "MAIN_CON_FPC",
+      "CAMLED_MIC_FPC",
+      "MAIN_LCD_FFC",
+      "USB_FPC"
     ],
     "sugestoes_ncm": [
       {
         "ncm": "8544.42.00",
         "descricao": "Fios, cabos e outros condutores, para uma tensão não superior a 1.000V, munidos de peças de conexão",
         "justificativa": "NCM padrão para cabos elétricos com conectores em ambas as pontas, que é o caso da maioria dos FPCs/FFCs internos.",
-        "confianca": "alta"
+        "confianca": "alta",
+        "add_by": "admin"
       }
-    ]
+    ],
+    "add_by": "admin"
   },
   {
     "termo_principal": "carcaça",
@@ -237,13 +224,7 @@
       "suporte de fixação",
       "plugue do slot para cartão"
     ],
-    "traducoes_en": [
-      "housing",
-      "enclosure",
-      "chassis",
-      "frame",
-      "cover"
-    ],
+    "traducoes_en": ["housing", "enclosure", "chassis", "frame", "cover"],
     "termos_tecnicos_relacionados": [
       "Conjunto da Carcaça Frontal",
       "Conjunto da Carcaça Traseira",
@@ -268,46 +249,69 @@
       "Suporte de fixação FPC leve",
       "Trava inferior",
       "suporte pogo",
-      "Suporte de fixação de abajur"
+      "Suporte de fixação de abajur",
+      "FLIP_COVER_ASSY",
+      "BASE_FRAME_ASSY",
+      "SCAN_HOUSING_ASSY",
+      "SUB_SUPPORT_HOUS_ASSY",
+      "FLIP_FRONT-COVER",
+      "FRONT_HSG_BODY",
+      "FRONT_HSG_BODY-2",
+      "PRINTER_FRAME_ASSY",
+      "PRINTER_BACK_COVER",
+      "PRINTER_TOP_COVER",
+      "MESH_FRAME_ASSY_Positive_V1.0",
+      "PRINTER_COVER",
+      "TABLE_BASE_1",
+      "SCAN_SUPPORT",
+      "SCR_SUPPORT"
     ],
     "sugestoes_ncm": [
       {
         "ncm": "8473.30.19",
         "descricao": "Outros gabinetes das máquinas das posições 84.71",
         "justificativa": "Se a carcaça for claramente identificável como parte de um computador ou terminal POS, esta é a classificação correta.",
-        "confianca": "alta"
+        "confianca": "alta",
+        "add_by": "admin"
       },
       {
         "ncm": "3926.90.90",
         "descricao": "Outras obras de plásticos",
         "justificativa": "Se a peça plástica não for identificável como parte exclusiva de uma máquina, ela é classificada pelo material. Alternativa comum.",
-        "confianca": "media"
+        "confianca": "media",
+        "add_by": "admin"
       }
-    ]
+    ],
+    "add_by": "admin"
   },
   {
     "termo_principal": "parafuso",
-    "sinonimos": [
-      "fixador",
-      "pino",
-      "perno"
-    ],
-    "traducoes_en": [
-      "screw"
-    ],
+    "sinonimos": ["fixador", "pino", "perno"],
+    "traducoes_en": ["screw"],
     "termos_tecnicos_relacionados": [
       "Parafuso de Máquina Phillips M1.4*L3.5",
       "Parafuso Auto-roscante Phillips M1.4*L2.0",
-      "Parafuso com Arruela M2*H4.0"
+      "Parafuso com Arruela M2*H4.0",
+      "M2.0_L4_SCREW",
+      "M3.0_L5_SCREW",
+      "M2_L7_0",
+      "M3.0_L14_SCREW",
+      "M2*L5.0 MM_SCREW",
+      "M2_L12_SCREW",
+      "SCREW",
+      "Par Phillips",
+      "Par Philips"
     ],
     "sugestoes_ncm": [
       {
         "ncm": "7318.15.00",
         "descricao": "Outros parafusos e pinos ou pernos, mesmo com as porcas e arruelas, de ferro ou aço",
         "justificativa": "NCM genérico para parafusos de ferro/aço. A classificação exata pode depender do tipo (máquina, auto-roscante), mas este é um bom ponto de partida.",
-        "confianca": "alta"
+        "confianca": "alta",
+        "add_by": "admin"
       }
-    ]
+    ],
+    "add_by": "admin"
   },
   {
     "termo_principal": "adesivo",
@@ -321,11 +325,7 @@
       "mylar",
       "placa mylar"
     ],
-    "traducoes_en": [
-      "adhesive",
-      "sticker",
-      "foam tape"
-    ],
+    "traducoes_en": ["adhesive", "sticker", "foam tape"],
     "termos_tecnicos_relacionados": [
       "Adesivo Traseiro da Lente",
       "Adesivo de Espuma",
@@ -341,91 +341,103 @@
       "Cola de espuma para remendo de suporte",
       "Adesivo de fácil remoção para bateria",
       "TP Adesivo",
+      "Tela Anti-Poeira do Microfone",
       "Proteção de componentes Mylar",
       "Conector de tela isolado Mylar",
-      "Cola KD2262"
+      "Cola KD2262",
+      "FLIP_FRONT-COVER_GULE",
+      "SANRE_METAL_ESD_PORON",
+      "CON_PCBA_ESD-DDB",
+      "ANT_PORON2",
+      "PCBA_COOLING-SILICA",
+      "CON-PCBA_COOLING-SILICA",
+      "TP-ZIF_MYLAR",
+      "SCAN_CAMERA_PORON",
+      "KEY-PCB_ESD_PORON",
+      "TP_GULE_TOP",
+      "TP_GULE_BOTTOM",
+      "LCD_ESD_PORON",
+      "TP-LCD-FPC_ESD_PORON",
+      "LCM-PCB_ESD-GULE",
+      "LCD_PORON1",
+      "LCD_PORON2",
+      "USB-FPC_PORON",
+      "SPK_PORON",
+      "ANT_PORON1",
+      "TP_FPC_ESD_PORON",
+      "MIAN_LCM_CABLE_ESD_PORON",
+      "main_conduction_fabic",
+      "SIDE-KEY_GULE",
+      "Device label_V2",
+      "label",
+      "normal_screen_protect_film"
     ],
     "sugestoes_ncm": [
       {
         "ncm": "3919.90.90",
         "descricao": "Outras chapas, folhas, tiras, fitas, películas e outras formas planas, autoadesivas, de plásticos",
         "justificativa": "NCM para fitas e películas adesivas de plástico. Abrange a maioria dos adesivos de dupla-face e espumas adesivas usadas em eletrônicos.",
-        "confianca": "alta"
+        "confianca": "alta",
+        "add_by": "admin"
       }
-    ]
+    ],
+    "add_by": "admin"
   },
   {
     "termo_principal": "alto-falante",
-    "sinonimos": [
-      "speaker",
-      "auto-falante",
-      "buzzer"
-    ],
-    "traducoes_en": [
-      "speaker",
-      "loudspeaker"
-    ],
+    "sinonimos": ["speaker", "auto-falante", "buzzer"],
+    "traducoes_en": ["speaker", "loudspeaker"],
     "termos_tecnicos_relacionados": [
       "FPC Principal (Alto-falante)",
       "Alto-falante 1712",
       "Rede composta para alto-falantes",
       "Espuma de vedação da cavidade traseira do alto-falante",
       "Pano condutor para alto-falante",
-      "1712 Alto-falante"
+      "1712 Alto-falante",
+      "SPEAKER"
     ],
     "sugestoes_ncm": [
       {
         "ncm": "8518.29.90",
         "descricao": "Outros alto-falantes",
         "justificativa": "NCM para outros tipos de alto-falantes, incluindo os pequenos módulos usados em dispositivos eletrônicos.",
-        "confianca": "alta"
+        "confianca": "alta",
+        "add_by": "admin"
       }
-    ]
+    ],
+    "add_by": "admin"
   },
   {
     "termo_principal": "motor",
-    "sinonimos": [
-      "motor de vibração",
-      "vibracall",
-      "motor de vibra"
-    ],
-    "traducoes_en": [
-      "motor",
-      "vibration motor"
-    ],
-    "termos_tecnicos_relacionados": [
-      "Motor de Vibração",
-      "Motor"
-    ],
+    "sinonimos": ["motor de vibração", "vibracall", "motor de vibra"],
+    "traducoes_en": ["motor", "vibration motor"],
+    "termos_tecnicos_relacionados": ["Motor de Vibração", "Motor"],
     "sugestoes_ncm": [
       {
         "ncm": "8501.10.19",
         "descricao": "Outros motores de corrente contínua com potência não superior a 37,5W",
         "justificativa": "Motores de vibração são pequenos motores DC. Esta é a classificação técnica correta para o componente.",
-        "confianca": "alta"
+        "confianca": "alta",
+        "add_by": "admin"
       }
-    ]
+    ],
+    "add_by": "admin"
   },
   {
     "termo_principal": "ímã",
-    "sinonimos": [
-      "magnete",
-      "imã"
-    ],
-    "traducoes_en": [
-      "magnet"
-    ],
-    "termos_tecnicos_relacionados": [
-      "Ímã"
-    ],
+    "sinonimos": ["magnete", "imã"],
+    "traducoes_en": ["magnet"],
+    "termos_tecnicos_relacionados": ["Ímã"],
     "sugestoes_ncm": [
       {
         "ncm": "8505.11.00",
         "descricao": "Ímãs permanentes e objetos destinados a tornarem-se ímãs permanentes, de metal",
         "justificativa": "NCM para ímãs permanentes metálicos, como os de neodímio, comumente usados em eletrônicos para fechos ou fixação.",
-        "confianca": "alta"
+        "confianca": "alta",
+        "add_by": "admin"
       }
-    ]
+    ],
+    "add_by": "admin"
   },
   {
     "termo_principal": "impressora",
@@ -434,21 +446,21 @@
       "mecanismo de impressora",
       "impressora térmica"
     ],
-    "traducoes_en": [
-      "printer",
-      "printer module"
-    ],
+    "traducoes_en": ["printer", "printer module"],
     "termos_tecnicos_relacionados": [
-      "Subconjunto da Impressora_Preto"
+      "Subconjunto da Impressora_Preto",
+      "THERMAL_PRINTER_MOVEMENT"
     ],
     "sugestoes_ncm": [
       {
         "ncm": "8443.99.90",
         "descricao": "Outras partes e acessórios de impressoras",
         "justificativa": "Como está descrito como um 'subconjunto', é mais provável que seja classificado como uma parte de impressora, e não a máquina completa.",
-        "confianca": "alta"
+        "confianca": "alta",
+        "add_by": "admin"
       }
-    ]
+    ],
+    "add_by": "admin"
   },
   {
     "termo_principal": "fio elétrico",
@@ -460,33 +472,44 @@
       "cabo ac",
       "condutor elétrico"
     ],
-    "traducoes_en": [
-      "wire",
-      "cable",
-      "harness",
-      "electrical conductor"
-    ],
+    "traducoes_en": ["wire", "cable", "harness", "electrical conductor"],
     "termos_tecnicos_relacionados": [
       "fio de led",
       "cabo de força",
       "cabo usb",
       "chicote elétrico",
-      "Cabo AC Padrão Brasil"
+      "Cabo AC Padrão Brasil",
+      "LEDSTRIP_CABLE_LINE",
+      "MAIN_CON_CABLE_LINE",
+      "CABLE_LINE",
+      "ESD_LINE",
+      "WBG_CABLE_LINE",
+      "MICRO_SWITCH_CABLE_LINE_120",
+      "MICRO_SWITCH_CABLE_LINE_50",
+      "PRINTER_CABLE_LINE",
+      "KEY_CABLE_LINE",
+      "MAIN_TLCM_CABLE_LINE",
+      "Brazil_AC Cable",
+      "DIV_CABLE_LINE",
+      "ANT_CABLE_LINE"
     ],
     "sugestoes_ncm": [
       {
         "ncm": "8544.42.00",
         "descricao": "Fios, cabos e outros condutores, para uma tensão não superior a 1.000V, munidos de peças de conexão",
         "justificativa": "NCM ideal para cabos que já vêm com conectores em suas pontas, como um 'fio da placa de LED' provavelmente teria.",
-        "confianca": "alta"
+        "confianca": "alta",
+        "add_by": "admin"
       },
       {
         "ncm": "8544.49.00",
         "descricao": "Outros condutores elétricos, para uma tensão não superior a 1.000 V",
         "justificativa": "NCM mais genérico para fios e cabos elétricos que não necessariamente possuem conectores.",
-        "confianca": "media"
+        "confianca": "media",
+        "add_by": "admin"
       }
-    ]
+    ],
+    "add_by": "admin"
   },
   {
     "termo_principal": "computador",
@@ -542,21 +565,25 @@
         "ncm": "8471.30",
         "descricao": "Máquinas automáticas para processamento de dados, portáteis, de peso não superior a 10 kg, contendo pelo menos uma unidade central de processamento, um teclado e uma tela (ecrã).",
         "justificativa": "NCM para notebooks, laptops e tablets.",
-        "confianca": "alta"
+        "confianca": "alta",
+        "add_by": "admin"
       },
       {
         "ncm": "8471.41",
         "descricao": "Outras máquinas automáticas para processamento de dados: -- Contendo, no mesmo corpo, pelo menos uma unidade central de processamento e uma unidade de entrada e de saída, mesmo combinadas.",
         "justificativa": "NCM para computadores de mesa tipo 'all-in-one'.",
-        "confianca": "alta"
+        "confianca": "alta",
+        "add_by": "admin"
       },
       {
         "ncm": "8471.50.10",
         "descricao": "De pequena capacidade, baseadas em microprocessadores, com capacidade de instalação, dentro do mesmo gabinete, de unidades de memória da subposição 8471.70, podendo conter múltiplos conectores de expansão (slots), e valor FOB não superior a US$ 12.500,00, por unidade",
         "justificativa": "NCM comum para computadores de mesa (desktops).",
-        "confianca": "alta"
+        "confianca": "alta",
+        "add_by": "admin"
       }
-    ]
+    ],
+    "add_by": "admin"
   },
   {
     "termo_principal": "processador",
@@ -595,9 +622,11 @@
         "ncm": "8542.31.90",
         "descricao": "Outros - Processadores e controladores, mesmo combinados com memórias, conversores, circuitos lógicos, amplificadores, relógios e circuitos de temporização, ou outros circuitos",
         "justificativa": "NCM genérico e amplamente utilizado para CPUs e SoCs (System on a Chip).",
-        "confianca": "alta"
+        "confianca": "alta",
+        "add_by": "admin"
       }
-    ]
+    ],
+    "add_by": "admin"
   },
   {
     "termo_principal": "memória ram",
@@ -633,9 +662,11 @@
         "ncm": "8473.30.42",
         "descricao": "Memórias de acesso aleatório (RAM)",
         "justificativa": "NCM específico para módulos de memória RAM quando classificados como partes de computadores.",
-        "confianca": "alta"
+        "confianca": "alta",
+        "add_by": "admin"
       }
-    ]
+    ],
+    "add_by": "admin"
   },
   {
     "termo_principal": "unidade de armazenamento",
@@ -677,28 +708,23 @@
         "ncm": "8471.70.10",
         "descricao": "Unidades de discos rígidos (HDD)",
         "justificativa": "NCM específico para discos rígidos magnéticos tradicionais.",
-        "confianca": "alta"
+        "confianca": "alta",
+        "add_by": "admin"
       },
       {
         "ncm": "8471.70.40",
         "descricao": "Unidades de memória de estado sólido (SSD - solid-state drives)",
         "justificativa": "NCM específico para unidades de estado sólido (SSDs).",
-        "confianca": "alta"
+        "confianca": "alta",
+        "add_by": "admin"
       }
-    ]
+    ],
+    "add_by": "admin"
   },
   {
     "termo_principal": "robô aspirador",
-    "sinonimos": [
-      "aspirador de pó robô",
-      "robô de limpeza",
-      "smart vacuum"
-    ],
-    "traducoes_en": [
-      "robot vacuum",
-      "robotic vacuum cleaner",
-      "smart vacuum"
-    ],
+    "sinonimos": ["aspirador de pó robô", "robô de limpeza", "smart vacuum"],
+    "traducoes_en": ["robot vacuum", "robotic vacuum cleaner", "smart vacuum"],
     "termos_tecnicos_relacionados": [
       "mapeamento",
       "laser",
@@ -723,22 +749,16 @@
         "ncm": "8508.11.00",
         "descricao": "Aspiradores -- De potência não superior a 1.500 W e cujo volume do reservatório não exceda 20 l",
         "justificativa": "NCM para aspiradores de pó domésticos, categoria na qual os robôs aspiradores se enquadram.",
-        "confianca": "alta"
+        "confianca": "alta",
+        "add_by": "admin"
       }
-    ]
+    ],
+    "add_by": "admin"
   },
   {
     "termo_principal": "automação residencial",
-    "sinonimos": [
-      "casa inteligente",
-      "domótica",
-      "smart home"
-    ],
-    "traducoes_en": [
-      "home automation",
-      "smart home",
-      "domotics"
-    ],
+    "sinonimos": ["casa inteligente", "domótica", "smart home"],
+    "traducoes_en": ["home automation", "smart home", "domotics"],
     "termos_tecnicos_relacionados": [
       "hub",
       "gateway",
@@ -768,43 +788,37 @@
         "ncm": "8517.62.77",
         "descricao": "Outros aparelhos para transmissão ou recepção de voz, imagem ou outros dados, incluindo os aparelhos para comunicação em redes por fio ou sem fio, de frequência inferior a 15 GHz",
         "justificativa": "NCM aplicável a hubs e gateways de automação residencial que comunicam via Wi-Fi, Zigbee, etc.",
-        "confianca": "media"
+        "confianca": "media",
+        "add_by": "admin"
       },
       {
         "ncm": "8536.50.90",
         "descricao": "Outros interruptores",
         "justificativa": "NCM para interruptores e tomadas inteligentes.",
-        "confianca": "alta"
+        "confianca": "alta",
+        "add_by": "admin"
       },
       {
         "ncm": "9405.42.00",
         "descricao": "Outras luminárias e aparelhos de iluminação, elétricos -- Concebidos para serem utilizados unicamente com fontes de luz de diodos emissores de luz (LED)",
         "justificativa": "NCM para lâmpadas e luminárias de LED inteligentes.",
-        "confianca": "alta"
+        "confianca": "alta",
+        "add_by": "admin"
       },
       {
         "ncm": "8543.70.99",
         "descricao": "Outras máquinas e aparelhos elétricos com função própria, não especificados nem compreendidos em outras posições deste Capítulo",
         "justificativa": "NCM 'catch-all' que pode ser usado para dispositivos de automação mais específicos sem classificação própria.",
-        "confianca": "baixa"
+        "confianca": "baixa",
+        "add_by": "admin"
       }
-    ]
+    ],
+    "add_by": "admin"
   },
   {
     "termo_principal": "Componentes Metálicos",
-    "sinonimos": [
-      "chapa de aço",
-      "eixo",
-      "mola",
-      "haste",
-      "fivela"
-    ],
-    "traducoes_en": [
-      "metal components",
-      "steel plate",
-      "shaft",
-      "spring"
-    ],
+    "sinonimos": ["chapa de aço", "eixo", "mola", "haste", "fivela"],
+    "traducoes_en": ["metal components", "steel plate", "shaft", "spring"],
     "termos_tecnicos_relacionados": [
       "Chapa magnética BTB",
       "Chapa de aço para fixação",
@@ -812,51 +826,62 @@
       "Eixo",
       "Primavera",
       "Haste de suporte",
-      "Fivela de trava"
+      "Fivela de trava",
+      "SANRE_METAL",
+      "FLIP_SPRING",
+      "FLIP_COVER_SPRING",
+      "FRONT_AL_ASM",
+      "AL_COVER-LEFT",
+      "AL_COVER-RIGHT",
+      "PRINTER_HANDLE_BRACKET",
+      "METAL_JOYSTICK",
+      "MOTOR_OUTPUT_HANDLE",
+      "PRINTER_CONTROL_LEVER_4.8",
+      "weight_Block"
     ],
     "sugestoes_ncm": [
       {
         "ncm": "7326.90.90",
         "descricao": "Outras obras de ferro ou aço",
         "justificativa": "NCM genérico para peças de ferro/aço sem uma classificação mais específica, como suportes, chapas e eixos.",
-        "confianca": "media"
+        "confianca": "media",
+        "add_by": "admin"
       },
       {
         "ncm": "7320.20.90",
         "descricao": "Outras molas helicoidais de ferro ou aço",
         "justificativa": "NCM para molas.",
-        "confianca": "alta"
+        "confianca": "alta",
+        "add_by": "admin"
       }
-    ]
+    ],
+    "add_by": "admin"
   },
   {
     "termo_principal": "Botões e Teclas",
-    "sinonimos": [
-      "botão",
-      "tecla",
-      "pad",
-      "anel decorativo"
-    ],
-    "traducoes_en": [
-      "buttons",
-      "keys",
-      "keypad"
-    ],
+    "sinonimos": ["botão", "tecla", "pad", "anel decorativo"],
+    "traducoes_en": ["buttons", "keys", "keypad"],
     "termos_tecnicos_relacionados": [
       "Botão liga/desliga",
       "botão de volume",
       "DEC1_Decoração",
       "DEC2_Plano decorativo",
-      "DEC3_Anel Decorativo"
+      "DEC3_Anel Decorativo",
+      "BACK_KEY",
+      "PWR_KEY_DOME",
+      "BACK_POWER_KEY",
+      "KEY"
     ],
     "sugestoes_ncm": [
       {
         "ncm": "3926.90.90",
         "descricao": "Outras obras de plásticos",
         "justificativa": "Botões e peças decorativas de plástico, que não são parte de um teclado completo, geralmente se enquadram aqui.",
-        "confianca": "media"
+        "confianca": "media",
+        "add_by": "admin"
       }
-    ]
+    ],
+    "add_by": "admin"
   },
   {
     "termo_principal": "Componentes de Borracha/Silicone",
@@ -869,34 +894,35 @@
       "capa de borracha",
       "pé de borracha"
     ],
-    "traducoes_en": [
-      "rubber components",
-      "silicone parts",
-      "gasket",
-      "pad"
-    ],
+    "traducoes_en": ["rubber components", "silicone parts", "gasket", "pad"],
     "termos_tecnicos_relacionados": [
       "Tapete para os pés",
       "Almofada para os pés",
       "Manga de borracha sensível à luz",
       "mic_capa de borracha macia",
       "Silicone condutivo",
-      "Silicone para dissipação de calor"
+      "Silicone para dissipação de calor",
+      "MIC_RUBBER",
+      "USB_RUBBER_V0.1",
+      "RUBBER_MAT1"
     ],
     "sugestoes_ncm": [
       {
         "ncm": "4016.99.90",
         "descricao": "Outras obras de borracha vulcanizada não endurecida",
         "justificativa": "NCM genérico para peças de borracha, como pés, capas e peças de vedação sem formato de junta.",
-        "confianca": "media"
+        "confianca": "media",
+        "add_by": "admin"
       },
       {
         "ncm": "4016.93.00",
         "descricao": "Juntas, gaxetas e semelhantes, de borracha vulcanizada não endurecida",
         "justificativa": "Se a peça tiver uma clara função de vedação (gaxeta), esta é a classificação correta.",
-        "confianca": "media"
+        "confianca": "media",
+        "add_by": "admin"
       }
-    ]
+    ],
+    "add_by": "admin"
   },
   {
     "termo_principal": "espuma",
@@ -908,13 +934,7 @@
       "pano condutor",
       "tecido condutor"
     ],
-    "traducoes_en": [
-      "foam",
-      "sponge",
-      "gasket",
-      "seal",
-      "conductive foam"
-    ],
+    "traducoes_en": ["foam", "sponge", "gasket", "seal", "conductive foam"],
     "termos_tecnicos_relacionados": [
       "Espuma de Vedação",
       "Espuma de Pressão",
@@ -933,8 +953,102 @@
         "ncm": "3926.90.90",
         "descricao": "Outras obras de plásticos",
         "justificativa": "Espumas não adesivas de plástico (ex: E.V.A, Poliuretano) são classificadas aqui como 'outras obras de plástico'.",
-        "confianca": "media"
+        "confianca": "media",
+        "add_by": "admin"
       }
-    ]
+    ],
+    "add_by": "admin"
+  },
+  {
+    "termo_principal": "bandeja de sim card",
+    "sinonimos": ["sim tray", "gaveta do chip"],
+    "traducoes_en": ["sim card tray"],
+    "termos_tecnicos_relacionados": ["SIM_MAILA", "cato"],
+    "sugestoes_ncm": [
+      {
+        "ncm": "8517.79.00",
+        "descricao": "Outras partes para aparelhos de telecomunicação",
+        "justificativa": "Sendo uma parte plástica ou metálica específica para um aparelho com função celular, enquadra-se como 'outras partes'.",
+        "confianca": "media",
+        "add_by": "admin"
+      }
+    ],
+    "add_by": "admin"
+  },
+  {
+    "termo_principal": "conector",
+    "sinonimos": ["pogo pin", "conector de carga"],
+    "traducoes_en": ["connector", "pogo pin"],
+    "termos_tecnicos_relacionados": ["POGOPIN"],
+    "sugestoes_ncm": [
+      {
+        "ncm": "8536.69.90",
+        "descricao": "Outros aparelhos para conexão em ou para circuitos elétricos",
+        "justificativa": "NCM para conectores elétricos diversos, como pogo pins.",
+        "confianca": "alta",
+        "add_by": "admin"
+      }
+    ],
+    "add_by": "admin"
+  },
+  {
+    "termo_principal": "fonte de alimentação",
+    "sinonimos": ["adaptador ac", "carregador"],
+    "traducoes_en": ["power supply", "ac adapter", "charger"],
+    "termos_tecnicos_relacionados": ["power_adapter"],
+    "sugestoes_ncm": [
+      {
+        "ncm": "8504.40.21",
+        "descricao": "transformadores elétricos, conversores elétricos estáticos (retificadores, por exemplo), bobinas de reatância e de autoindução,",
+        "justificativa": "NCM para fontes de alimentação conversoras de corrente alternada para contínua.",
+        "confianca": "alta",
+        "add_by": "admin"
+      }
+    ],
+    "add_by": "admin"
+  },
+  {
+    "termo_principal": "alça",
+    "sinonimos": ["hand strap", "suporte de mão"],
+    "traducoes_en": ["strap", "hand strap"],
+    "termos_tecnicos_relacionados": ["HAND"],
+    "sugestoes_ncm": [
+      {
+        "ncm": "4205.00.00",
+        "descricao": "Outras obras de couro natural ou reconstituído.",
+        "justificativa": "Se a alça for de couro.",
+        "confianca": "media",
+        "add_by": "admin"
+      },
+      {
+        "ncm": "6307.90.90",
+        "descricao": "Outros artigos têxteis confeccionados.",
+        "justificativa": "Se a alça for de material têxtil.",
+        "confianca": "media",
+        "add_by": "admin"
+      }
+    ],
+    "add_by": "admin"
+  },
+  {
+    "termo_principal": "acabamento",
+    "sinonimos": ["peça decorativa", "deco"],
+    "traducoes_en": ["trim", "decorative piece"],
+    "termos_tecnicos_relacionados": [
+      "LED_DECO",
+      "FRONT_DECO_GULE1",
+      "FRONT_DECO_GULE2",
+      "FRONT_DECO_positive_V1.0"
+    ],
+    "sugestoes_ncm": [
+      {
+        "ncm": "3926.90.90",
+        "descricao": "Outras obras de plásticos",
+        "justificativa": "Peças plásticas decorativas sem função principal se enquadram nesta categoria.",
+        "confianca": "media",
+        "add_by": "admin"
+      }
+    ],
+    "add_by": "admin"
   }
 ]

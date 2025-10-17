@@ -1,32 +1,58 @@
+# data_updater.py
+
+"""
+Módulo de atualização de dados fiscais para o serviço TupiNCM.
+
+Este script é responsável por popular e manter atualizado um banco de dados
+SQLite local com informações fiscais de duas fontes principais:
+1.  **IBPTax (IBPT):** Baixa as tabelas de alíquotas aproximadas de tributos
+    por NCM para cada estado brasileiro, diretamente do repositório SVN do ACBr.
+2.  **CEST (Confaz):** Realiza o scraping da página do CONFAZ para extrair
+    a relação de NCMs com seus respectivos Códigos Especificadores da
+    Substituição Tributária (CEST).
+
+O script é projetado para ser robusto, utilizando sessões HTTP com retentativas,
+validação de banco de dados e um mecanismo de cache para os dados do CEST
+baseado em metadados (ETag/Last-Modified).
+
+Pode ser executado como um script independente para realizar uma atualização
+completa do banco de dados.
+"""
+
 import os
 import json
 import re
 import sqlite3
 import requests
-from typing import List, Dict, Any, Tuple
+from typing import List, Dict, Any
 from io import StringIO
-
 from bs4 import BeautifulSoup
 import pandas as pd
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
-import csv
 
 
-# --- CONFIGURAÇÃO ---
+# --- Constantes de Configuração ---
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-# Note que a pasta 'data' será criada se não existir.
-DB_PATH = os.path.join(BASE_DIR, 'data', 'ibpt.db')
-METADATA_FILE_PATH = os.path.join(BASE_DIR, 'data', 'cest_metadata.json')
+DATA_DIR = os.path.join(BASE_DIR, 'data')
+DB_PATH = os.path.join(DATA_DIR, 'ibpt.db')
+METADATA_FILE_PATH = os.path.join(DATA_DIR, 'cest_metadata.json')
 
-# URLS
+# URLS de origem dos dados
 IBPT_SVN_URL = 'http://svn.code.sf.net/p/acbr/code/trunk2/Exemplos/ACBrTCP/ACBrIBPTax/tabela/'
 CEST_URL = "https://www.confaz.fazenda.gov.br/legislacao/convenios/2018/CV142_18"
 
 
-# --- Configuração de Sessão HTTP com Retentativas ---
-def get_session():
-    """Configura uma sessão de requests com retentativas para maior robustez."""
+def get_session() -> requests.Session:
+    """
+    Configura e retorna uma sessão de requests com uma estratégia de retentativas.
+
+    Isso aumenta a resiliência do script contra falhas de rede transitórias
+    ao tentar baixar os dados das fontes externas.
+
+    Returns:
+        Um objeto requests.Session configurado com retentativas.
+    """
     session = requests.Session()
     retry_strategy = Retry(
         total=3,
@@ -39,106 +65,159 @@ def get_session():
     return session
 
 
-# --- FUNÇÕES DE BANCO DE DADOS ---
+# --- Funções de Gerenciamento do Banco de Dados ---
+
+def is_db_valid(db_path: str) -> bool:
+    """
+    Verifica se o banco de dados SQLite existe, não está vazio e contém a tabela principal.
+
+    Args:
+        db_path: O caminho para o arquivo do banco de dados SQLite.
+
+    Returns:
+        True se o banco de dados for considerado válido, False caso contrário.
+    """
+    if not os.path.exists(db_path) or os.path.getsize(db_path) == 0:
+        return False
+    
+    try:
+        conn = sqlite3.connect(db_path)
+        cursor = conn.cursor()
+        
+        # Verifica se a tabela 'ibpt_taxes' existe.
+        cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='ibpt_taxes';")
+        if cursor.fetchone() is None:
+            conn.close()
+            return False
+            
+        # Verifica se a tabela contém dados.
+        cursor.execute("SELECT COUNT(*) FROM ibpt_taxes;")
+        if cursor.fetchone()[0] == 0:
+            conn.close()
+            return False
+
+        conn.close()
+        return True
+
+    except sqlite3.DatabaseError:
+        # Retorna False se o arquivo estiver corrompido ou não for um DB válido.
+        return False
+    
 def get_db_connection(db_path: str) -> sqlite3.Connection:
-    """Retorna uma conexão SQLite e cria o diretório 'data/' se não existir."""
+    """
+    Estabelece e retorna uma conexão com o banco de dados SQLite.
+
+    Cria o diretório 'data' se ele não existir e configura o modo de jornalismo
+    para WAL (Write-Ahead Logging) para melhor desempenho de escrita e concorrência.
+
+    Args:
+        db_path: O caminho para o arquivo do banco de dados.
+
+    Returns:
+        Um objeto de conexão sqlite3.Connection.
+    """
     data_dir = os.path.dirname(db_path)
     if not os.path.exists(data_dir):
         os.makedirs(data_dir)
         print(f"Diretório '{data_dir}' criado.")
         
     conn = sqlite3.connect(db_path)
+    # Habilita o modo WAL para melhor performance de escrita.
     conn.execute('PRAGMA journal_mode = WAL')
     return conn
 
 def criar_tabelas(conn: sqlite3.Connection):
-    """Cria ou verifica a existência das tabelas IBPT e CEST."""
+    """
+    Cria o esquema do banco de dados, incluindo tabelas, índices e gatilhos.
+
+    Define as tabelas `ibpt_taxes` e `cest_data`, cria índices para otimizar
+    consultas e configura uma tabela virtual FTS5 para busca textual eficiente,
+    juntamente com gatilhos para manter o índice de busca sincronizado.
+
+    Args:
+        conn: A conexão ativa com o banco de dados.
+    """
     print('Verificando e criando tabelas, se necessário...')
+    cursor = conn.cursor()
     
-    # Tabela principal de impostos do IBPT
-    conn.execute("""
+    # Tabela principal para dados do IBPT
+    cursor.execute("""
         CREATE TABLE IF NOT EXISTS ibpt_taxes (
-          ncm TEXT NOT NULL,
-          uf TEXT NOT NULL,
-          ex TEXT,
-          tipo TEXT,
-          descricao TEXT,
-          aliqNacional REAL,
-          aliqEstadual REAL,
-          aliqMunicipal REAL,
-          aliqImportado REAL,
-          vigenciaInicio TEXT,
-          vigenciaFim TEXT,
-          chave TEXT,
-          versao TEXT,
-          fonte TEXT,
-          PRIMARY KEY (ncm, uf)
+            ncm TEXT NOT NULL, uf TEXT NOT NULL, ex TEXT, tipo TEXT,
+            descricao TEXT, aliqNacional REAL, aliqEstadual REAL,
+            aliqMunicipal REAL, aliqImportado REAL, vigenciaInicio TEXT,
+            vigenciaFim TEXT, chave TEXT, versao TEXT, fonte TEXT,
+            PRIMARY KEY (ncm, uf)
         );
     """)
-    # Tabela de dados do CEST
-    conn.execute("""
+    # Tabela para dados do CEST
+    cursor.execute("""
         CREATE TABLE IF NOT EXISTS cest_data (
-          cest TEXT NOT NULL,
-          ncm TEXT NOT NULL,
-          descricao TEXT,
-          PRIMARY KEY (cest, ncm)
+            cest TEXT NOT NULL, ncm TEXT NOT NULL, descricao TEXT,
+            PRIMARY KEY (cest, ncm)
         );
     """)
-    # Índices para performance
-    conn.execute('CREATE INDEX IF NOT EXISTS idx_ncm_ibpt ON ibpt_taxes (ncm);')
-    conn.execute('CREATE INDEX IF NOT EXISTS idx_ncm_cest ON cest_data (ncm);')
-    conn.execute('CREATE INDEX IF NOT EXISTS idx_cest_data_cest ON cest_data (cest);')
+    # Índices para otimizar consultas
+    cursor.execute('CREATE INDEX IF NOT EXISTS idx_ncm_ibpt ON ibpt_taxes (ncm);')
+    cursor.execute('CREATE INDEX IF NOT EXISTS idx_ncm_cest ON cest_data (ncm);')
     
-    # Criação do FTS5 (Tabela Virtual de Busca) e Triggers - Recriando a lógica do Node.js
+    # Tabela virtual FTS5 para busca textual rápida e eficiente.
     try:
-        conn.execute("""
+        cursor.execute("""
             CREATE VIRTUAL TABLE IF NOT EXISTS ibpt_search USING fts5(
-              ncm, 
-              descricao, 
-              content='ibpt_taxes', 
-              content_rowid='rowid',
-              tokenize = 'porter unicode61'
+                ncm, descricao, content='ibpt_taxes', content_rowid='rowid',
+                tokenize = 'porter unicode61'
             );
         """)
         
-        # Gatilhos (Triggers) para manter a tabela de busca sincronizada.
-        conn.execute("""
+        # Gatilhos para sincronizar automaticamente a tabela FTS5 com a tabela ibpt_taxes.
+        cursor.execute("""
             CREATE TRIGGER IF NOT EXISTS ibpt_taxes_after_insert AFTER INSERT ON ibpt_taxes BEGIN
-              INSERT INTO ibpt_search(rowid, ncm, descricao) VALUES (new.rowid, new.ncm, new.descricao);
+                INSERT INTO ibpt_search(rowid, ncm, descricao) VALUES (new.rowid, new.ncm, new.descricao);
             END;
         """)
-        # A trigger de DELETE precisa de sintaxe diferente para sqlite3
-        conn.execute("""
+        cursor.execute("""
             CREATE TRIGGER IF NOT EXISTS ibpt_taxes_after_delete AFTER DELETE ON ibpt_taxes BEGIN
-              DELETE FROM ibpt_search WHERE rowid = old.rowid;
+                DELETE FROM ibpt_search WHERE rowid = old.rowid;
             END;
         """)
-        conn.execute("""
+        cursor.execute("""
             CREATE TRIGGER IF NOT EXISTS ibpt_taxes_after_update AFTER UPDATE ON ibpt_taxes BEGIN
-              DELETE FROM ibpt_search WHERE rowid = old.rowid;
-              INSERT INTO ibpt_search(rowid, ncm, descricao) VALUES (new.rowid, new.ncm, new.descricao);
+                DELETE FROM ibpt_search WHERE rowid = old.rowid;
+                INSERT INTO ibpt_search(rowid, ncm, descricao) VALUES (new.rowid, new.ncm, new.descricao);
             END;
         """)
-        print('Tabelas, índices primários e FTS5 (busca) prontos.')
+        print('Tabelas, índices e FTS5 (busca textual) configurados.')
         
     except sqlite3.OperationalError as e:
-        # FTS5 pode não estar disponível em algumas instalações SQLite. A busca do FastAPI é o fallback.
-        print(f"WARN: FTS5 não pôde ser criado: {e}. A busca usará o modelo semântico/similaridade do FastAPI.")
+        # Fallback caso a extensão FTS5 não esteja habilitada no SQLite.
+        print(f"AVISO: FTS5 não pôde ser criado: {e}. A busca dependerá do modelo do FastAPI.")
 
     conn.commit()
 
 
-# --- LÓGICA DE ATUALIZAÇÃO ---
+# --- Lógica de Processamento e Atualização de Dados ---
 
 def processar_ibpt(session: requests.Session, conn: sqlite3.Connection):
-    """Baixa e processa os arquivos IBPTax do repositório."""
+    """
+    Realiza o scraping, download e processamento dos dados do IBPTax.
+
+    Limpa a tabela existente, navega pelo repositório SVN do ACBr, baixa
+    cada arquivo CSV de UF, processa os dados com Pandas e os insere
+    no banco de dados. Ao final, reconstrói o índice FTS5.
+
+    Args:
+        session: A sessão de requests a ser utilizada para os downloads.
+        conn: A conexão ativa com o banco de dados.
+    """
     print('Iniciando processamento dos dados do IBPT...')
-    
-    conn.execute('DELETE FROM ibpt_taxes;')
+    cursor = conn.cursor()
+    cursor.execute('DELETE FROM ibpt_taxes;')
 
     insert_sql = """
-        INSERT OR REPLACE INTO ibpt_taxes (ncm, uf, ex, tipo, descricao, aliqNacional, aliqEstadual, aliqMunicipal, aliqImportado, vigenciaInicio, vigenciaFim, chave, versao, fonte)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT OR REPLACE INTO ibpt_taxes (ncm, uf, ex, tipo, descricao, aliqNacional, 
+        aliqEstadual, aliqMunicipal, aliqImportado, vigenciaInicio, vigenciaFim, 
+        chave, versao, fonte) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """
     
     try:
@@ -151,200 +230,164 @@ def processar_ibpt(session: requests.Session, conn: sqlite3.Connection):
         for file in csv_files:
             match = re.search(r'TabelaIBPTax([A-Z]{2})', file)
             if not match:
-                print(f"WARN: Não foi possível extrair a UF do arquivo: {file}. Pulando.")
                 continue
-            uf_do_arquivo = match.group(1)
+            uf = match.group(1)
             
-            print(f"Processando IBPT para a UF: {uf_do_arquivo} (arquivo: {file})...")
+            print(f"Processando IBPT para a UF: {uf}...")
             
             file_url = IBPT_SVN_URL + file
-            csv_response = session.get(file_url, stream=True)
+            csv_response = session.get(file_url)
             csv_response.raise_for_status()
             
-            # Decodifica como latin-1 ou ISO-8859-1 (comum em arquivos brasileiros)
-            csv_content = csv_response.content.decode('iso-8859-1') 
+            # Decodifica usando 'iso-8859-1', comum em arquivos legados brasileiros.
+            csv_content = csv_response.content.decode('iso-8859-1')
             
-            df_csv = pd.read_csv(
-                StringIO(csv_content), 
-                sep=';', 
-                header=None, 
-                skiprows=1,
-                encoding='iso-8859-1',
-                dtype=str
+            df = pd.read_csv(
+                StringIO(csv_content), sep=';', header=None, skiprows=1,
+                encoding='iso-8859-1', dtype=str
             )
-            
-            df_csv.columns = ['codigo', 'ex', 'tipo', 'descricao', 'nacionalfederal', 
-                              'importadosfederal', 'estadual', 'municipal', 'vigenciainicio', 
-                              'vigenciafim', 'chave', 'versao', 'fonte']
+            df.columns = ['codigo', 'ex', 'tipo', 'descricao', 'nacionalfederal', 
+                          'importadosfederal', 'estadual', 'municipal', 'vigenciainicio', 
+                          'vigenciafim', 'chave', 'versao', 'fonte']
 
-            data_to_insert = []
-            for _, row in df_csv.iterrows():
-                ncm_limpo = str(row['codigo'] or '').replace('.', '')
-                
-                def clean_float(val):
-                    return float(str(val or '0').replace(',', '.'))
-                    
-                data_to_insert.append((
-                    ncm_limpo,
-                    uf_do_arquivo,
-                    row['ex'],
-                    row['tipo'],
-                    row['descricao'],
-                    clean_float(row['nacionalfederal']),
-                    clean_float(row['estadual']),
-                    clean_float(row['municipal']),
-                    clean_float(row['importadosfederal']),
-                    row['vigenciainicio'],
-                    row['vigenciafim'],
-                    row['chave'],
-                    row['versao'],
-                    row['fonte']
-                ))
+            def clean_float(val):
+                return float(str(val or '0').replace(',', '.'))
 
-            conn.executemany(insert_sql, data_to_insert)
+            data_to_insert = [
+                (
+                    str(row['codigo'] or '').replace('.', ''), uf, row['ex'], row['tipo'], row['descricao'],
+                    clean_float(row['nacionalfederal']), clean_float(row['estadual']),
+                    clean_float(row['municipal']), clean_float(row['importadosfederal']),
+                    row['vigenciainicio'], row['vigenciafim'], row['chave'], row['versao'], row['fonte']
+                ) for _, row in df.iterrows()
+            ]
+
+            cursor.executemany(insert_sql, data_to_insert)
             conn.commit()
-            print(f"{len(data_to_insert)} linhas inseridas para {uf_do_arquivo}.")
+            print(f"{len(data_to_insert)} registros inseridos para {uf}.")
         
-        # Reconstrói o FTS5 (se existir) após a importação em massa
+        # Após a inserção em massa, reconstrói o índice FTS5 para garantir consistência.
         try:
-            print('Reconstruindo índice de busca semântica FTS5...')
-            conn.execute("INSERT INTO ibpt_search(ibpt_search) VALUES('rebuild');")
+            print('Reconstruindo índice de busca FTS5...')
+            cursor.execute("INSERT INTO ibpt_search(ibpt_search) VALUES('rebuild');")
             conn.commit()
-            print('Índice de busca FTS5 reconstruído com sucesso.')
+            print('Índice de busca FTS5 reconstruído.')
         except sqlite3.OperationalError:
-            pass # Ignora se a tabela FTS5 não foi criada
+            pass # Ignora se FTS5 não existe.
 
         print('Processamento do IBPT concluído.')
-
     except requests.RequestException as e:
-        print(f"Erro de rede ao processar IBPT: {e}")
+        print(f"ERRO DE REDE ao processar IBPT: {e}")
     except Exception as e:
-        print(f"Erro inesperado ao processar IBPT: {e}")
+        print(f"ERRO INESPERADO ao processar IBPT: {e}")
 
 
 def processar_cest(session: requests.Session, conn: sqlite3.Connection):
-    """Baixa e processa os dados da tabela CEST do site do Confaz."""
+    """
+    Realiza o scraping e processamento dos dados de CEST do CONFAZ.
+
+    Verifica se houve atualização na fonte de dados remota comparando
+    cabeçalhos HTTP (ETag, Last-Modified) com metadados locais. Se houver
+    mudanças, baixa e processa a página, inserindo os dados no banco.
+
+    Args:
+        session: A sessão de requests a ser utilizada.
+        conn: A conexão ativa com o banco de dados.
+    """
     print('Iniciando verificação de atualização do CEST...')
     
-    metadados_locais = {}
+    # Carrega metadados locais para verificar a necessidade de atualização.
+    metadata = {}
     if os.path.exists(METADATA_FILE_PATH):
-        try:
-            with open(METADATA_FILE_PATH, 'r', encoding='utf-8') as f:
-                metadados_locais = json.load(f)
-        except json.JSONDecodeError:
-            print("WARN: Arquivo de metadados CEST corrompido.")
+        with open(METADATA_FILE_PATH, 'r', encoding='utf-8') as f:
+            metadata = json.load(f)
 
     try:
-        head_response = session.head(CEST_URL, verify=False, timeout=10)
-        etag_remoto = head_response.headers.get('etag')
-        last_modified_remoto = head_response.headers.get('last-modified')
+        head = session.head(CEST_URL, verify=False, timeout=10)
+        remote_etag = head.headers.get('etag')
+        remote_last_modified = head.headers.get('last-modified')
 
-        if (etag_remoto and etag_remoto == metadados_locais.get('etag')) or \
-           (last_modified_remoto and last_modified_remoto == metadados_locais.get('lastModified')):
-            print('Tabela CEST não foi modificada. Pulando atualização.')
+        if (remote_etag and remote_etag == metadata.get('etag')) or \
+           (remote_last_modified and remote_last_modified == metadata.get('lastModified')):
+            print('Tabela CEST não foi modificada desde a última verificação. Pulando.')
             return
 
-        print('Nova versão da tabela CEST encontrada. Iniciando processamento completo...')
-
+        print('Nova versão da tabela CEST encontrada. Iniciando download...')
         response = session.get(CEST_URL, verify=False, timeout=30)
         response.raise_for_status()
+        
         soup = BeautifulSoup(response.text, 'html.parser')
-        todos_os_itens = []
+        data_to_insert = []
 
-        for element in soup.find_all('p', class_='A6-1Subtitulo'):
-            titulo_anexo = element.get_text().strip()
-            if titulo_anexo.startswith('ANEXO ') and len(titulo_anexo) < 15:
-                tabela = element.find_next_sibling('table')
-                if tabela:
-                    for i, linha in enumerate(tabela.find_all('tr')):
-                        if i == 0: continue
-                        
-                        celulas = linha.find_all('td')
-                        if len(celulas) >= 4:
-                            ncm_string = celulas[2].get_text().strip()
-                            ncm_array = re.split(r'\s+', ncm_string)
-                            ncm_array = [ncm for ncm in ncm_array if len(ncm) > 0]
-                            
-                            if ncm_array:
-                                todos_os_itens.append({
-                                    'CEST': celulas[1].get_text().strip(),
-                                    'NCM_SH': ncm_array,
-                                    'Descricao': re.sub(r'\s\s+', ' ', celulas[3].get_text().strip())
-                                })
+        for table in soup.find_all('table'):
+            for i, row in enumerate(table.find_all('tr')):
+                if i == 0: continue # Pula o cabeçalho da tabela
+                
+                cells = row.find_all('td')
+                if len(cells) >= 4:
+                    cest = cells[1].get_text(strip=True).replace('.', '')
+                    ncms = re.split(r'[\s,;]+', cells[2].get_text(strip=True))
+                    description = re.sub(r'\s{2,}', ' ', cells[3].get_text(strip=True))
+                    
+                    for ncm in ncms:
+                        clean_ncm = re.sub(r'[^\d]', '', ncm)
+                        if clean_ncm:
+                            data_to_insert.append((cest, clean_ncm, description))
 
-        if not todos_os_itens:
-            print("WARN: Não foram encontrados itens CEST na página.")
+        if not data_to_insert:
+            print("AVISO: Nenhum item CEST foi extraído da página.")
             return
 
-        conn.execute('DELETE FROM cest_data;')
-        insert_cest = 'INSERT OR IGNORE INTO cest_data (cest, ncm, descricao) VALUES (?, ?, ?)'
-        data_to_insert = []
-        
-        for item in todos_os_itens:
-            cest_limpo = str(item['CEST'] or '').replace('.', '')
-            for ncm in item['NCM_SH']:
-                ncm_limpo = re.sub(r'[^\d]', '', ncm)
-                if ncm_limpo:
-                    data_to_insert.append((cest_limpo, ncm_limpo, item['Descricao']))
-
-        conn.executemany(insert_cest, data_to_insert)
+        cursor = conn.cursor()
+        cursor.execute('DELETE FROM cest_data;')
+        cursor.executemany(
+            'INSERT OR IGNORE INTO cest_data (cest, ncm, descricao) VALUES (?, ?, ?)',
+            data_to_insert
+        )
         conn.commit()
-        print(f"{len(data_to_insert)} combinações CEST-NCM inseridas.")
+        print(f"{cursor.rowcount} combinações CEST-NCM inseridas.")
         
-        novos_metadados = {
-            'etag': etag_remoto,
-            'lastModified': last_modified_remoto,
-            'lastUpdate': pd.Timestamp.now().isoformat()
+        # Salva os novos metadados para controle de versão.
+        new_metadata = {
+            'etag': remote_etag, 'lastModified': remote_last_modified,
+            'lastUpdate': pd.Timestamp.now(tz='UTC').isoformat()
         }
-        
-        data_dir = os.path.dirname(METADATA_FILE_PATH)
-        if not os.path.exists(data_dir):
-             os.makedirs(data_dir)
-             
         with open(METADATA_FILE_PATH, 'w', encoding='utf-8') as f:
-            json.dump(novos_metadados, f, ensure_ascii=False, indent=2)
-            
+            json.dump(new_metadata, f, ensure_ascii=False, indent=2)
         print('Metadados de controle do CEST foram atualizados.')
 
     except requests.RequestException as e:
-        print(f"Erro de rede ao processar CEST: {e}")
+        print(f"ERRO DE REDE ao processar CEST: {e}")
     except Exception as e:
-        print(f"Erro inesperado ao processar CEST: {e}")
+        print(f"ERRO INESPERADO ao processar CEST: {e}")
 
 
 def atualizar_banco_dados():
-    """Função principal para executar a atualização completa."""
+    """
+    Orquestra o processo completo de atualização do banco de dados.
+
+    Inicializa a conexão, cria o esquema de tabelas e chama as funções
+    de processamento para IBPT e CEST em sequência, garantindo que a
+    conexão com o banco seja fechada ao final.
+    """
     conn = None
     try:
         session = get_session()
         conn = get_db_connection(DB_PATH)
         criar_tabelas(conn)
         
-        # Sequência de atualização
         processar_ibpt(session, conn)
         processar_cest(session, conn)
         
     except Exception as e:
         print(f"ERRO CRÍTICO no processo de atualização: {e}")
-        # Se falhar, é crucial garantir que a conexão seja fechada
     finally:
         if conn:
             conn.close()
             print("Conexão com o banco de dados fechada após atualização.")
 
-# --- EXPORTAÇÃO (OPCIONAL) ---
-# Se for necessário, descomente e ajuste o processo de exportação abaixo:
-#
-# def exportar_arquivos(conn: sqlite3.Connection):
-#     print('\nIniciando exportação para JSON e CSV...')
-#     # ... (Lógica de exportação do Node.js transformada para Python/Pandas) ...
-#     pass
-#
-# def main_export():
-#     conn = get_db_connection(DB_PATH)
-#     exportar_arquivos(conn)
-#     conn.close()
-
 
 if __name__ == '__main__':
+    print("Iniciando atualização manual do banco de dados fiscal...")
     atualizar_banco_dados()
+    print("Atualização concluída.")
